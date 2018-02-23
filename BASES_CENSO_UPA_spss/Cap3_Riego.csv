@@ -1,0 +1,40 @@
+UPA,r1,r2,r3,r3_a,r4_a,r4_b
+9,Si,Aspersion,0.75,Hectarea,Encanada o quebrada,No aplica
+21,Si,Aspersion,0.04,Hectarea,Agua Lluvia,Vertiente
+35,Si,Goteo,4,Hectarea,Encanada o quebrada,Tanquero/agua dulce
+52,Si,Gravedad,0.5,Hectarea,Encanada o quebrada,No aplica
+52,Si,Gravedad,0.5,Hectarea,Encanada o quebrada,No aplica
+81,Si,Goteo,3,Hectarea,Encanada o quebrada,No aplica
+118,Si,Gravedad,0.25,Hectarea,Vertiente,No aplica
+120,Si,Gravedad,0.5,Hectarea,Agua Lluvia,Tanquero/agua dulce
+134,Si,Aspersion,1,Hectarea,Vertiente,No aplica
+143,Si,Aspersion,2.03,Hectarea,Vertiente,No aplica
+180,Si,Aspersion,0.03,Hectarea,Encanada o quebrada,No aplica
+191,Si,Aspersion,0.25,Hectarea,Encanada o quebrada,No aplica
+198,Si,Goteo,4,Hectarea,Encanada o quebrada,Agua Lluvia
+206,Si,Goteo,0.2,Hectarea,Agua Lluvia,Tanquero/agua dulce
+222,Si,Aspersion,4,Hectarea,Encanada o quebrada,No aplica
+231,Si,Aspersion,0.025,Hectarea,Encanada o quebrada,Agua Lluvia
+236,Si,Aspersion,4,Hectarea,Encanada o quebrada,No aplica
+236,Si,Aspersion,4,Hectarea,Encanada o quebrada,No aplica
+241,Si,Gravedad,1,Hectarea,Encanada o quebrada,No aplica
+266,Si,Goteo,0.24,Hectarea,Ojo (brote) de agua,Tanquero/agua dulce
+275,Si,Goteo,1,Hectarea,Tanquero/agua dulce,Vertiente
+276,Si,Goteo,0.033,Hectarea,Agua Lluvia,No aplica
+308,Si,Goteo,0.12,Hectarea,Agua Lluvia,Tanquero/agua salobre
+321,Si,Goteo,0.2,Hectarea,Agua Lluvia,Tanquero/agua salobre
+321,Si,Goteo,0.2,Hectarea,Agua Lluvia,Tanquero/agua salobre
+417,Si,Goteo,0.16,Hectarea,Tanquero/agua salobre,Agua Lluvia
+417,Si,Goteo,0.5,Hectarea,Tanquero/agua salobre,Agua Lluvia
+451,Si,Goteo,0.36,Hectarea,Tanquero/agua dulce,Agua Lluvia
+497,Si,Goteo,0.1,Hectarea,Agua Lluvia,Tanquero/agua salobre
+499,Si,Goteo,0.0965,Hectarea,Agua Lluvia,Tanquero/agua salobre
+504,Si,Goteo,0.1,Hectarea,Tanquero/agua salobre,No aplica
+522,Si,Goteo,0.2,Hectarea,Agua Lluvia,Tanquero/agua salobre
+560,Si,Gravedad,0.1606,Hectarea,Agua Lluvia,Encanada o quebrada
+562,Si,Goteo,0.01,Hectarea,Agua Lluvia,No aplica
+596,Si,Gravedad,3,Hectarea,Agua Lluvia,Tanquero/agua dulce
+620,Si,Goteo,0.098,Hectarea,Tanquero/agua salobre,Agua Lluvia
+671,Si,Gravedad,0.5,Hectarea,Agua Lluvia,Tanquero/agua salobre
+679,Si,Goteo,0.028,Hectarea,Tanquero/agua salobre,Agua Lluvia
+691,Si,Goteo,0.054,Hectarea,Tanquero/agua salobre,Agua Lluvia

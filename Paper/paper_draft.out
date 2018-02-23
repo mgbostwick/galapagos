@@ -1,0 +1,21 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Background}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Data}{section.1}% 3
+\BOOKMARK [1][-]{section.2}{Modeling}{}% 4
+\BOOKMARK [2][-]{subsection.2.1}{Challenges to address}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.2}{Overview of methods}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Results}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Farm Success}{section.3}% 8
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Productivity}{subsection.3.1}% 9
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Net Income}{subsection.3.1}% 10
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Number of Workers Supported}{subsection.3.1}% 11
+\BOOKMARK [2][-]{subsection.3.2}{Invasive Species}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.3}{Land use choices}{section.3}% 13
+\BOOKMARK [1][-]{section.4}{Statistical Methods}{}% 14
+\BOOKMARK [2][-]{subsection.4.1}{Generalized Linear Models}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.2}{Performance Measures}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.3}{Best Subset and Forward Selection}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.4}{Regularized Regression}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.5}{Comparison of methods}{section.4}% 19
+\BOOKMARK [1][-]{section.5}{Conclusion}{}% 20
+\BOOKMARK [1][-]{section.6}{Appendix}{}% 21

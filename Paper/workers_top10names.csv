@@ -1,0 +1,11 @@
+elasticnet,forward,subset
+a16 e,a16 e,a16 f
+cantonSanta Cruz,CosechaLibras,CosechaLibras
+CosechaLibras,CTransitorios ACELGA,e29
+d3Si,GastosAgricolas,Forestal CEDRO
+e29,GastosPecuarios,GastosPecuarios
+GastosAgricolas,netincome,libras vendida
+GastosPecuarios,o4 a,o4 a
+s4,s9,percinv2
+v3,v30 a,produccion en libras producto cosechado autoconsumo
+v45,v49,ReclassCONSERVACION

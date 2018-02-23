@@ -1,0 +1,139 @@
+UPA,af1,af2,af3,af4,af5,af5_a,af6,af7,af7_a,af8
+12,Si,CEDRO,Cedro/Cedrela,Madera,200,METROS,800,0, ,0
+13,Si,GUABO,Guabo,Lena/carbon,0, ,,3,METROS,12
+13,Si,CEDRO,Cedro/Cedrela,Madera,0, ,,3,METROS,12
+21,Si,GUABO,Guabo,Madera,0, ,,30,TABLAS,90
+30,Si,CEDRO,Cedro/Cedrela,Madera,300,METROS,1200,, ,
+33,Si,CEDRO,Cedro/Cedrela,Madera,400,METROS,800,0,METROS,0
+34,Si,CEDRO,Cedro/Cedrela,Madera,0, ,0,3,ARBOLES,300
+39,Si,CEDRO,Cedro/Cedrela,Madera,24,METROS,400,, ,
+40,Si,CEDRO,Cedro/Cedrela,Madera,0, ,0,500,METROS,2000
+46,Si,CEDRO,Cedro/Cedrela,Madera,400,METROS,1600,, ,0
+53,Si,CEDRO,Cedro/Cedrela,Madera,50,METROS,200,, ,
+55,Si,AGUACATE,Aguacate,Madera,800,TABLAS,3200,, ,
+55,Si,CEDRELA,Cedro/Cedrela,Madera,400,METROS,2000,, ,
+78,Si,CEDRO,Cedro/Cedrela,Madera,80,METROS,500,, ,
+79,Si,CEDRO,Cedro/Cedrela,Madera,3,METROS CUBICOS,300,, ,
+63,Si,CEDRO,Cedro/Cedrela,Madera,0, ,,5,METROS CUBICOS,500
+69,Si,CEDRO,Cedro/Cedrela,Madera,15,METROS,,15,METROS CUBICOS,1500
+71,Si,CEDRO,Cedro/Cedrela,Madera,150,METROS,750,150,METROS,750
+71,Si,AGUACATE,Aguacate,Madera,200,METROS,1000,, ,
+75,Si,CEDRO,Cedro/Cedrela,Madera,1,METROS CUBICOS,100,, ,
+80,Si,CEDRO,Cedro/Cedrela,Madera,1000,METROS,8400,, ,
+85,Si,CEDRO,Cedro/Cedrela,Madera,10,ARBOLES,4000,, ,
+98,Si,CEDRO,Cedro/Cedrela,Madera,2,METROS CUBICOS,400,, ,
+98,Si,POMAROSA,Pomarosa,Estacas/cercas,0, ,,100,METROS,198
+106,Si,AGUACATE,Aguacate,Madera,0, ,,30,TABLAS,240
+114,Si,GUAYABO,Guayabo/Guayabillo,Estacas/cercas,0, ,,100,METROS,200
+115,Si,AGUACATE,Aguacate,Madera,30,METROS,200,, ,
+148,Si,AGUACATE,Aguacate,Madera,0, ,,10,ARBOLES,1000
+148,Si,GUABO,Guabo,Madera,0, ,,15,ARBOLES,1500
+152,Si,CEDRO,Cedro/Cedrela,Madera,0, ,,40,TABLAS,240
+170,Si,CEDRO,Cedro/Cedrela,Madera,40,METROS CUBICOS,2800,10,METROS CUBICOS,700
+182,Si,CEDRO,Cedro/Cedrela,Madera,0, ,,88,METROS,528
+207,Si,AGUACATE,Aguacate,Madera,0, ,0,50,METROS,300
+217,Si,CEDRO,Cedro/Cedrela,Madera,0, ,,160,METROS,960
+234,Si,AGUACATE,Aguacate,Madera,1000,TABLAS,3000,, ,
+246,Si,CEDRO,Cedro/Cedrela,Madera,0, ,,3,ARBOLES,500
+253,Si,AGUACATE,Aguacate,Madera,1500,METROS,1250,, ,
+259,Si,CEDRO,Cedro/Cedrela,Madera,24,METROS,600,, ,
+264,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,10,ARBOLES,500
+277,Si,LAUREL,Laurel,Estacas/cercas,0, ,,5,ARBOLES,500
+279,Si,CEDRELA,Cedro/Cedrela,Madera,750,TABLAS,2250,, ,
+292,Si,CEDRELA,Cedro/Cedrela,Madera,100,ARBOLES,1000,, ,
+298,Si,CEDRELA,Cedro/Cedrela,Madera,1800,METROS,5400,, ,
+301,Si,CAOBA,Caoba,Madera,2,ARBOLES,3000,, ,
+301,Si,CEDRELA,Cedro/Cedrela,Madera,30,ARBOLES,4500,, ,
+301,Si,CEDRELA,Cedro/Cedrela,Madera,2,ARBOLES,300,, ,
+305,Si,CEDRELA,Cedro/Cedrela,Madera,10,ARBOLES,1000,, ,
+315,Si,LAUREL,Laurel,Madera,20,ARBOLES,200,, ,
+319,Si,CEDRELA,Cedro/Cedrela,Madera,70,ARBOLES,3500,, ,
+319,Si,LAUREL,Laurel,Madera,0, ,,2,ARBOLES,60
+325,Si,BALSA,Balsa,Madera,133,TABLAS,400,100,TABLAS,300
+353,Si,CEDRELA,Cedro/Cedrela,Madera,1000,TABLAS,5000,, ,
+367,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,40,TABLAS,160
+368,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,200,TABLAS,600
+368,Si,AGUACATE,Aguacate,Madera,0, ,,150,TABLAS,450
+378,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,200,TABLAS,800
+378,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,70,CUARTON,210
+401,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,15,ARBOLES,6500
+406,Si,CAOBA,Caoba,Madera,0, ,,12,ARBOLES,2
+408,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,15,ARBOLES,15
+419,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,10,ARBOLES,300
+419,Si,LAUREL,Laurel,Madera,0, ,,10,ARBOLES,200
+448,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,40,TABLAS,120
+451,Si,CEDRELA,Cedro/Cedrela,Madera,30,ARBOLES,2800,, ,
+460,Si,LAUREL,Laurel,Estacas/cercas,0, ,,6,ARBOLES,72
+460,Si,CEDRELA,Cedro/Cedrela,Madera,150,TABLAS,750,, ,
+471,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,2,ARBOLES,400
+483,Si,CEDRELA,Cedro/Cedrela,Madera,3000,TABLAS,3000,, ,
+483,Si,BALSA,Balsa,Madera,0, ,,600,TABLAS,200
+484,Si,GUAYABILLO,Guayabo/Guayabillo,Lena/carbon,0, ,,20,ARBOLES,100
+484,Si,GUAYABILLO,Guayabo/Guayabillo,Estacas/cercas,0, ,,12,CUARTON,60
+496,Si,CEDRELA,Cedro/Cedrela,Madera,400,METROS,0,, ,
+500,Si,AGUACATE,Aguacate,Madera,0, ,,350,METROS,525
+500,Si,LAUREL,Laurel,Madera,0, ,,350,METROS,525
+501,Si,LAUREL,Laurel,Madera,0, ,,40,METROS,60
+518,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,500,METROS,1500
+529,Si,CEDRELA,Cedro/Cedrela,Madera,40,ARBOLES,800,, ,
+532,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,10,ARBOLES,1500
+533,Si,CEDRELA,Cedro/Cedrela,Madera,60,ARBOLES,14400,, ,
+533,Si,CANA GUADUA,Cana Gadua,Madera,1000,UNIDADES,1000,, ,
+533,Si,LAUREL,Laurel,Madera,20,ARBOLES,1000,, ,
+537,Si,CEDRELA,Cedro/Cedrela,Madera,500,METROS,2500,, ,
+542,Si,CEDRELA,Cedro/Cedrela,Madera,1000,METROS,3000,, ,
+553,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,10,ARBOLES,2000
+555,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,400,METROS,800
+557,Si,CEDRELA,Cedro/Cedrela,Madera,4000,METROS,10000,, ,
+564,Si,CEDRELA,Cedro/Cedrela,Madera,2900,METROS,8700,100,METROS,300
+566,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,15,ARBOLES,3000
+566,Si,LAUREL,Laurel,Madera,0, ,,10,ARBOLES,600
+567,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,50,METROS,2
+569,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,200,METROS,800
+579,Si,LAUREL,Laurel,Estacas/cercas,2,ARBOLES,80,, ,
+596,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,2,ARBOLES,200
+606,Si,CEDRELA,Cedro/Cedrela,Madera,2500,METROS,3750,800,METROS,1200
+601,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,2,ARBOLES,500
+610,Si,CEDRELA,Cedro/Cedrela,Madera,5000,METROS,5000,"5,000",METROS,5000
+623,Si,AGUACATE,Aguacate,Madera,900,METROS,1125,, ,
+625,Si,GUABO,Guabo,Madera,60,ARBOLES,1200,, ,
+625,Si,AGUACATE,Aguacate,Madera,60,ARBOLES,1200,, ,
+625,Si,CEDRELA,Cedro/Cedrela,Madera,10,ARBOLES,200,, ,
+625,Si,BALSA,Balsa,Madera,60,ARBOLES,1200,, ,
+626,Si,CEDRELA,Cedro/Cedrela,Madera,1500,METROS,4500,60,METROS,180
+628,Si,CEDRELA,Cedro/Cedrela,Madera,2000,METROS,6000,, ,
+638,Si,AGUACATE,Aguacate,Madera,1000,METROS,3000,, ,
+656,Si,CEDRELA,Cedro/Cedrela,Madera,1000,METROS,700,, ,
+656,Si,AGUACATE,Aguacate,Madera,600,METROS,250,, ,
+657,Si,CEDRELA,Cedro/Cedrela,Estacas/cercas,0, ,,16,ESTACAS,32
+660,Si,CEDRELA,Cedro/Cedrela,Madera,900,METROS,2500,, ,
+660,Si,FERNAN SANCHEZ,Fernan Sanchez,Madera,200,METROS,600,, ,
+665,Si,GUABO,Guabo,Madera,0, ,,5,ARBOLES,500
+665,Si,NISPERO,Nispero,Madera,0, ,,5,ARBOLES,500
+665,Si,AGUACATE,Aguacate,Madera,0, ,,5,ARBOLES,500
+666,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,3,ARBOLES,300
+674,Si,AGUACATE,Aguacate,Madera,0, ,,4,ARBOLES,400
+675,Si,AGUACATE,Aguacate,Madera,40,ARBOLES,2000,, ,
+679,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,2,ARBOLES,2000
+682,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,5,ARBOLES,1500
+688,Si,NOGAL,Nogal,Madera,0, ,,10,ARBOLES,3000
+689,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,15,ARBOLES,4500
+691,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,6,ARBOLES,240
+696,Si,CEDRELA,Cedro/Cedrela,Madera,5,ARBOLES,400,5,ARBOLES,400
+705,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,20,ARBOLES,1000
+707,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,20,ARBOLES,6000
+707,Si,AGUACATE,Aguacate,Madera,0, ,,"1,000",TABLAS,4000
+707,Si,BALSA,Balsa,Madera,3,ARBOLES,500,, ,
+709,Si,GUAYABO,Guayabo/Guayabillo,Estacas/cercas,0, ,,10,ARBOLES,100
+709,Si,GUAYABO,Guayabo/Guayabillo,Lena/carbon,0, ,,40,ARBOLES,400
+709,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,3,ARBOLES,300
+713,Si,CEDRELA,Cedro/Cedrela,Madera,30,ARBOLES,6000,, ,
+715,Si,JABONCILLO,Jaboncillo,Madera,0, ,,35,METROS,105
+715,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,35,METROS,105
+736,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,50,METROS,50
+736,Si,FERNAN SANCHEZ,Fernan Sanchez,Madera,0, ,,2,METROS,20
+736,Si,JABONCILLO,Jaboncillo,Madera,0, ,,30,METROS,30
+739,Si,AGUACATE,Aguacate,Madera,35,METROS,350,, ,
+744,Si,CEDRELA,Cedro/Cedrela,Madera,100,METROS,3000,, ,
+745,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,320,METROS,960
+753,Si,CEDRELA,Cedro/Cedrela,Madera,0, ,,30,METROS,210
