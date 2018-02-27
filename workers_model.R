@@ -25,10 +25,46 @@ workers_x.df <- subset(reduced_data, select = workers_include)
 
 all_workers_hist <- ggplot(data = reduced_data) + geom_bar(mapping = aes(x = factor(workers_binary)))
 nonzero_hist <- ggplot(data = reduced_data[reduced_data$fulltimework > 0,]) + geom_histogram(mapping = aes(x = fulltimework))
+log_nonzero_hist <- ggplot(data = reduced_data[reduced_data$fulltimework > 0,]) + geom_histogram(mapping = aes(x = log10(fulltimework)))
 
 pdf("Paper/images/worker_histograms.pdf",width=12,height=8)
-grid.arrange(all_workers_hist, nonzero_hist, nrow = 1)
+grid.arrange(all_workers_hist, nonzero_hist, log_nonzero_hist, nrow = 1)
 dev.off()
 
-workers.models <- fit.models(model.name = "workers", x.data = workers_x.df, 
+worker_binary.models <- fit.models(model.name = "workers_binary", x.data = workers_x.df, 
                                 y.response = reduced_data$workers_binary, response.family = "binomial")
+
+
+workers_x.nonzero.pre <- subset(reduced_data[reduced_data$fulltimework > 0,], select = workers_include)
+num_workers_log <- log10(reduced_data[reduced_data$fulltimework > 0, 'fulltimework'])
+
+workers.matrix <- model.matrix(~., workers_x.nonzero.pre)[,-1]
+col_vars <- apply(workers.matrix, 2, var)
+zero_variance <- names(col_vars[col_vars == 0])
+
+workers_x.nonzero <- workers.matrix[,!colnames(workers.matrix) %in% zero_variance]
+remove_vars <- c("ga15_cualLLANTAS", "`ENERGIA_ELENERGIA SOLAR PUBLICA`", "`ENERGIA_ELGENERADOR PRIVADO`")
+workers_x.nonzero <- as.data.frame(workers_x.nonzero[,!colnames(workers_x.nonzero) %in% remove_vars])
+
+worker_nonzero.models <- fit.models(model.name = "workers_nonzero", x.data = workers_x.nonzero, 
+                             y.response = num_workers_log, response.family = "gaussian")
+
+
+
+which(duplicated(workers_x.nonzero, MARGIN = 0))
+
+
+
+### Diagnostics to find linear dependencies and correlations between variables
+your.matrix <- workers_x.nonzero
+rankifremoved <- sapply(1:ncol(your.matrix), function (x) qr(your.matrix[,-x])$rank)
+which(rankifremoved == max(rankifremoved))
+
+corrs <-cor(workers_x.nonzero)
+corrs[upper.tri(corrs)] <- NA
+diag(corrs) <- NA
+
+corrs_reshape <- melt(corrs, na.rm = TRUE)
+(high_corrs <- corrs_reshape[abs(corrs_reshape$value) > 0.9,])
+
+

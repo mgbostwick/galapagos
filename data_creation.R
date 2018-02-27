@@ -352,7 +352,7 @@ library(tidyverse)
   summary(data$permworkerspay)
   
 #NUMBER OF FULL TIME WORKERS SUPPORTED
-  data$fulltimework<-as.integer(data$laborcost/659)
+  data$fulltimework<-data$laborcost/659
 
 #PRODUCTION COST
   data$productioncost <-rowSums(data[,c('GastosAgricolas','GastosPecuarios')], na.rm=TRUE) #Expenses for all agricultural activities and labor

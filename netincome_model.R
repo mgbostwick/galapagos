@@ -21,14 +21,34 @@ netincome_include <- vars[which(is.na(vars$`Net Income`)),1]$`Variable Name`
 
 full_hist <- ggplot(data = reduced_data) + geom_histogram(mapping = aes(x = netincome))
 reduced_hist <- ggplot(data = reduced_data) + geom_histogram(mapping = aes(x = netincome)) + 
-  scale_x_continuous(limits = c(-5e+04, 5e+04))
+  scale_x_continuous(limits = c(-2e+04, 2e+04))
 pdf("Paper/images/netincome_histograms.pdf",width=12,height=8)
 grid.arrange(full_hist, reduced_hist, nrow = 1)
 dev.off()
 
+netincome_x.df <- subset(reduced_data[abs(reduced_data$netincome) < 2e+04,], select = netincome_include)
+netincome <- reduced_data[abs(reduced_data$netincome) < 2e+04, 'netincome']
 
-netincome_x.df <- subset(reduced_data[abs(reduced_data$netincome) < 5e+04,], select = netincome_include)
-netincome <- reduced_data[abs(reduced_data$netincome) < 5e+04, 'netincome']
 
-netincome.models <- fit.models(model.name = "netincome", x.data = netincome_x.df, 
+netincome.matrix <- model.matrix(~., netincome_x.df)[,-1]
+col_vars <- apply(netincome.matrix, 2, var)
+zero_variance <- names(col_vars[col_vars == 0])
+
+netincome_x.nonzero <- netincome.matrix[,!colnames(netincome.matrix) %in% zero_variance]
+
+
+### Diagnostics to find linear dependencies and correlations between variables
+your.matrix <- netincome_x.nonzero
+rankifremoved <- sapply(1:ncol(your.matrix), function (x) qr(your.matrix[,-x])$rank)
+which(rankifremoved == max(rankifremoved))
+
+corrs <-cor(netincome_x.nonzero)
+corrs[upper.tri(corrs)] <- NA
+diag(corrs) <- NA
+
+corrs_reshape <- melt(corrs, na.rm = TRUE)
+(high_corrs <- corrs_reshape[abs(corrs_reshape$value) > 0.9,])
+
+
+netincome.models <- fit.models(model.name = "netincome", x.data = as.data.frame(netincome_x.nonzero), 
                                 y.response = netincome, response.family = "gaussian")
