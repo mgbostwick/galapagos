@@ -34,7 +34,14 @@ perc_long2 <- melt(landuse_x.df[,reclass_vars])
 ggplot(perc_long2, aes(x=factor(variable),y=value)) + geom_boxplot()
 
 primary_use <- factor(apply(landuse_x.df[,c('percperm','perctemp','perctill','percpasture','percbrush')], 1, which.max))
+primary_use <- factor(apply(landuse_x.df[,survey_vars], 1, which.max))
 table(primary_use)
+
+perc_vars <- as.matrix(reduced_data[,survey_vars])
 
 landuse.models <- fit.models(model.name = "landuse", x.data = landuse_x.df, 
                                      y.response = primary_use, response.family = "multinomial")
+
+summary(landuse_x.df$ReclassPECUARIO)
+summary(landuse_x.df$`ReclassSIN APROVECHAMIENTO`)
+summary(landuse_x.df$percpasture)

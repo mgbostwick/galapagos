@@ -1,6 +1,7 @@
-"elasticnet","forward"
-"CosechaLibras","GastosPecuarios"
-"GastosPecuarios","librasvendida"
-"s4","perctemp2"
-"v3","v3"
-"v45","VentaLibras"
+elasticnet,forward
+CATTLETRUE (+),GastosPecuarios (+)
+CosechaLibras (+),librasvendida (+)
+GastosPecuarios (+),perctemp2 (-)
+s4 (+),v3 (+)
+v3 (+),VentaLibras (+)
+v45 (+), 

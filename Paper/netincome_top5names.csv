@@ -1,6 +1,6 @@
-"elasticnet","forward","subset"
-"CTransitoriosFREJOL TIERNO","cantonSan Cristobal","PastosMIEL O SETARIA"
-"CTransitoriosPEREJIL","CTransitoriosACELGA","cantonSan Cristobal"
-"PastosBRACHIARIA","CTransitoriosPIMIENTO","ArbolesTORONJA"
-"produccionenlibrasproductovendido","v3","s9"
-"VentaLibras","v30a","v30a"
+elasticnet,forward
+CATTLETRUE (-),AGUAAGUA POTABLE PUBLICA (+)
+percperm2 (+),cantonSan Cristobal (+)
+produccionenlibrasproductocosechadoautoconsumo (+),v3 (-)
+v3 (-),v30a (-)
+v45 (-),v53a (+)

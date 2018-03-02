@@ -19,9 +19,6 @@ production_include <- vars[which(is.na(vars$`UPA Production`)),1]$`Variable Name
 production_x.df <- subset(reduced_data[reduced_data$productivity > 0,], select = production_include)
 
 log_productivity <- log10(reduced_data[reduced_data$productivity > 0, 'productivity'])
-
-zero_prod <- reduced_data[reduced_data$productivity ==0,]
-par(mfrow = c(2,1))
 raw_prod_hist <- ggplot(data = reduced_data) + geom_histogram(mapping = aes(x = productivity))
 log_prod_hist <- ggplot(data = reduced_data) + geom_histogram(mapping = aes(x = log10(productivity)))
 lower_prod_hist <- ggplot(data = reduced_data) + geom_histogram(mapping = aes(x = productivity)) +

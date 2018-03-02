@@ -1,6 +1,7 @@
-"elasticnet","forward"
-"`CTransitorios MAIZ SUAVE CHOCLO`","canton"
-"cantonSan Cristobal","CPermanentesNARANJA"
-"cantonSanta Cruz","CTransitoriosMAIZ SUAVE CHOCLO"
-"pc4None","v30a"
-"v30 a","canton"
+elasticnet,forward
+ABANDONEDTRUE (+),cantonFloreana (-)
+cantonSan Cristobal (+),cantonSan Cristobal (+)
+cantonSanta Cruz (-),cantonSanta Cruz (-)
+CTransitoriosMAIZ SUAVE CHOCLO (+),CTransitoriosMAIZ SUAVE CHOCLO (+)
+pc4None (-),v30a (+)
+v30a (+), 

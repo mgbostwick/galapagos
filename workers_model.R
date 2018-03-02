@@ -19,13 +19,17 @@ vars <-  read_excel("Variables.xlsx", sheet = "vars", range = "C2:I241")
 workers_include <- vars[which(is.na(vars$`Number workers supported`)),1]$`Variable Name`
 
 workers_nonzero <- reduced_data[reduced_data$fulltimework > 0, 'fulltimework']
-reduced_data$workers_binary <- (reduced_data$fulltimework > 0)*1
+reduced_data$workers_binary <- factor(reduced_data$fulltimework > 0)
 
 workers_x.df <- subset(reduced_data, select = workers_include)
 
-all_workers_hist <- ggplot(data = reduced_data) + geom_bar(mapping = aes(x = factor(workers_binary)))
+levels(reduced_data$workers_binary) = c("Zero", "Positive")
+
+all_workers_hist <- ggplot(data = reduced_data) + geom_bar(mapping = aes(x = workers_binary)) + xlab("fulltimework")
 nonzero_hist <- ggplot(data = reduced_data[reduced_data$fulltimework > 0,]) + geom_histogram(mapping = aes(x = fulltimework))
 log_nonzero_hist <- ggplot(data = reduced_data[reduced_data$fulltimework > 0,]) + geom_histogram(mapping = aes(x = log10(fulltimework)))
+
+#log_nonzero_hist2 <- ggplot(data = reduced_data) + geom_histogram(mapping = aes(x = log10(fulltimework+0.1)))
 
 pdf("Paper/images/worker_histograms.pdf",width=12,height=8)
 grid.arrange(all_workers_hist, nonzero_hist, log_nonzero_hist, nrow = 1)

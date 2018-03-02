@@ -21,13 +21,13 @@ netincome_include <- vars[which(is.na(vars$`Net Income`)),1]$`Variable Name`
 
 full_hist <- ggplot(data = reduced_data) + geom_histogram(mapping = aes(x = netincome))
 reduced_hist <- ggplot(data = reduced_data) + geom_histogram(mapping = aes(x = netincome)) + 
-  scale_x_continuous(limits = c(-2e+04, 2e+04))
+  scale_x_continuous(limits = c(-3e+04, 3e+04))
 pdf("Paper/images/netincome_histograms.pdf",width=12,height=8)
 grid.arrange(full_hist, reduced_hist, nrow = 1)
 dev.off()
 
-netincome_x.df <- subset(reduced_data[abs(reduced_data$netincome) < 2e+04,], select = netincome_include)
-netincome <- reduced_data[abs(reduced_data$netincome) < 2e+04, 'netincome']
+netincome_x.df <- subset(reduced_data[abs(reduced_data$netincome) < sd(reduced_data$netincome),], select = netincome_include)
+netincome <- reduced_data[abs(reduced_data$netincome) < sd(reduced_data$netincome), 'netincome']
 
 
 netincome.matrix <- model.matrix(~., netincome_x.df)[,-1]

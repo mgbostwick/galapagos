@@ -1,6 +1,6 @@
-"elasticnet","forward","subset"
-"PastosKING GRASS","ALCANTARILALCANTARILLADO PUBLICO","af6"
-"cantonSan Cristobal","PastosMIEL O SETARIA","ArbolesGUAYABA"
-"ArbolesGUANABANA","cantonSanta Cruz","ArbolesPLATANO"
-"CTransitoriosCILANTRO","ArbolesPLATANO","e30"
-"pc4None","CTransitoriosCOL","tp48g"
+elasticnet,forward
+ArbolesPIcaA (-),ALCANTARILLETRINA PRIVADA (+)
+cantonSan Cristobal (+),ArbolesPLATANO (-)
+CTransitoriosCILANTRO (-),cantonSan Cristobal (+)
+INTERNETSIN INFORMACION (-),cantonSanta Cruz (+)
+pc4None (+),PastosMIEL O SETARIA (+)

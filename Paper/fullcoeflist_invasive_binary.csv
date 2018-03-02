@@ -1,8 +1,8 @@
-"variable","elastic","forward"
-"(Intercept)",-1.33734494860232,-1.05498427402255
-"cantonSan Cristobal",NA,0.193464076894808
-"cantonSanta Cruz",NA,-1.77104978821324
-"cantonFloreana",NA,-16.5992772528467
-"v30 a",NA,0.00755926912993419
-"`CTransitorios MAIZ SUAVE CHOCLO`",NA,0.902806405854257
-"CPermanentes NARANJA",NA,-0.691183567998633
+variable,elastic,forward
+Intercept,-1.337344949,-1.054984274
+cantonSan Cristobal,NA,0.193464077
+cantonSanta Cruz,NA,-1.771049788
+cantonFloreana,NA,-16.59927725
+v30a,NA,0.007559269
+CTransitoriosMAIZ SUAVE CHOCLO,NA,0.902806406
+CPermanentesNARANJA,NA,-0.691183568
