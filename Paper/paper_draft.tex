@@ -25,6 +25,7 @@
 \usepackage{algorithmicx}
 \usepackage{csvsimple}
 \usepackage{subcaption}
+\usepackage{numprint}
 
 
 \newcommand{\bX}{\mathbf{X}}
@@ -35,7 +36,7 @@
 
 \graphicspath{ {images/} }
 
-\title{Survival of the Fittest: Variable Selection on Galapagos Agricultural Data}
+\title{Survival of the Fittest: Variable Selection on Agricultural Data from the Gal\'apagos Islands}
 
 \author{
   Michael Bostwick\\
@@ -53,31 +54,45 @@
 
 \maketitle
 \begin{abstract}
-  This paper...
-  
+  Variable selection is an important first step when analyzing datasets with a large number of potential predictor variables. We 
+  apply two techniques, Forward Selection and Elasticnet,  to find the most important factors in a dataset detailing over 200 
+  socioeconomic measurements for 755 farms on the Gal\'apagos Islands. Modeling five different outcome variables, we find 
+  the data available has the strongest linear relationships with Productivity and Land Use Choices. For each of the outcome 
+  variables we present the top five predictor variables as well as a full set of coefficients for the optimally predictive model.
   \end{abstract}
 
 \section{Introduction}
 
 \subsection{Background}
 
-The Galapagos Islands make for a feasible and significant case study of complex systems. Due to its relative isolation and smaller size the interaction of factors can more realistically be modeled for the Galapagos Islands than other systems. Yet the Galapagos Islands also represents an important example of the competing forces of resource conservation and economic development in a rapidly changing environment. Prior work has created agent-based models of the Galapagos, but with limited interaction parameters between agents, particularly in regards to farm success walsh. In order to create a more detailed, and perhaps more accurate, simulation, the relationships between different factors on the island must be better understood. This work aims to sort through a large number of possible relationships and clarify the empirically most significant ones for future study and incorporation into simulations. 
+The Gal\'apagos Islands make for a feasible and significant case study of complex systems. Due to its relative isolation and smaller size the interaction of factors can more realistically be modeled for the Gal\'apagos Islands than other systems. Yet the Gal\'apagos Islands also represents an important example of the competing forces of resource conservation and economic development in a rapidly changing environment. Prior work has created agent-based models of the Gal\'apagos, but with limited interaction parameters between agents, particularly in regards to farm success (\cite{miller}, \cite{valdivia},\cite{walsh}). In order to create a more detailed and perhaps more accurate simulation, the relationships between different factors on the island must be better understood. This work aims to search through a large number of possible relationships and identify the empirically most significant ones for future study and incorporation into simulation models. 
 
 \subsection{Data}
 
 The data available to study the dynamics between agricultural measures and related factors primarily 
 comes from the Censo de las Unidades de Producci\'on Agropecuaria (upa) de Gal\'apagos (Census of Agricultural Production 
-Units (UPA) of Galapagos) ref census. This is a self-reported survey with data from 755 
-farms detailing the production and sale of crops and livestock, agricultural expenses, and land use 
-decisions. The response rate for this was ??. In addition to the census, data is also available from ... including information on water, energy and road access.
+Units (UPA) of Galapagos) (\cite{census}). This is a self-reported survey with data from 755 farms (UPAs) detailing many characteristics. The questions covered fall into the following categories:
+\begin{itemize}
+\item{General characteristics (land area, age of landowner, etc.)}
+\item{Permanent crops (specific types and quantity)}
+\item{Temporary crops (specific types and quantity)}
+\item{Pastures (specific types and quantity)}
+\item{Tree crops (specific types and quantity)}
+\item{Livestock production (detailed by animal)}
+\item{Expenses (detailed by category)}
+\item{Workers (detailed by role)}
+\item{Land use (8 different categories)}
 
-categories...
+\end{itemize}
 
-In total, under the direction of the client 239 variables were selected for consideration in modeling 
-relationships between predictors and five outcome variables of interest. Some of the five outcome variables of interest come 
-directly from survey responses, while others were derived from a combination of multiple variables. When modeling derived 
-outcome variables all variables used in its calculation were removed from consideration. The client also denoted specific 
-predictor variables to exclude from particular models when their inclusion would not be beneficial. For example, while the 
+In addition to this census, data is also available from satellite image classification including 
+information on water, energy and road access. In total, under the direction of the client 239 variables were selected for 
+consideration in modeling relationships between potential predictors and five outcome variables of interest. 
+
+Some of the five outcome variables of interest came directly from survey responses, while others were derived from a 
+combination of multiple variables. When analyzing a derived outcome variable all variables used in its original calculation were 
+removed from consideration in the model . The client also denoted specific predictor variables to exclude from particular 
+models when their inclusion would not be beneficial. For example, while the 
 amount of crops sold in pounds was not directly used to calculate net income, the obvious relationship existent precluded it 
 from inclusion. In addition, predictor variables that met one or more of the following criteria were removed prior to modeling: 
 zero variance, extremely high (>0.99) or perfect correlation with other predictor variables, or linear dependence with other 
@@ -87,36 +102,38 @@ exact number of predictor variables included in each model varied slightly, but 
 \subsection{Organization of Report}
 
 The remainder of this report is divided into four sections, Section 2: Modeling, Section 3: Results, Section 4: Statistical 
-Methods, and Section 5: Limitations and Future Work. Section 2 provides an brief overview of the analysis so that the results can be understood. In Section 3 results for each of the 5 outcome variables is provided, where standard tables and graphs are repeated for each. A more in-depth explanation of the statistical methods used is contained in Section 4, but this section can be referenced as needed. Section 5 details important considerations when interpreting the results and suggests possible avenues for future work. Lastly, References and the Appendix, including additional tables and figures, can be found at the end.
+Methods, and Section 5: Limitations and Future Work. Section 2 provides a brief overview of the analysis so that the results can be understood. In Section 3 results for each of the 5 outcome variables are provided, where standard tables and graphs are repeated for each. A more in-depth explanation of the statistical methods used is contained in Section 4, but this section can be referenced as needed. Section 5 details important considerations when interpreting the results and suggests possible avenues for future work. Lastly, References and the Appendix, including additional tables and figures, can be found at the end.
 
 \section{Modeling}
 \subsection{Challenges to address}
 
-The primary challenge in this analysis is the vast amount of potential predictor variables. This challenge is twofold; 1.) when 
-the number of predictors is large the calculation of a reliable model is difficult and 2.) interpreting the coefficients of many 
+The primary challenge in this analysis is the vast number of potential predictor variables. This challenge is twofold; 1.) when 
+the number of predictors is large the determination of a reliable model is difficult and 2.) interpreting the coefficients of many 
 predictors simultaneously is not an easy task for humans (and will make resulting simulations overly complicated). For this 
 reason, the analysis focuses on the use of two variable selection techniques that aim to build a linear model with a subset of 
 the available variables that still maintains a strong explanatory/predictive performance.
 
-Secondarily, when performing standard linear regression the error is assumed to be normally 
-distributed, which means the outcome variable should be roughly normally distributed. When this is not true, as is the case for 
-several outcome variables in this study, a poorly fitting model will be found with unreliable coefficients. In order to address this 
-issue transformations to the data and modifications to the standard linear model will be considered.
+Secondarily, when performing standard linear regression the error is assumed to be normally distributed.  While this does not 
+mean the outcome variable necessarily needs to be normally distributed, large deviations from normality can cause issues. 
+Several outcome variables in this study show strong non-normality, which can contribute to a poorly fitting model and unreliable estimates of the coefficients. In order to address this issue transformations to the data and modifications to the standard linear model will be considered.
 
 \subsection{Overview of methods}
 
-A brief overview of the statistical methods used is presented here to allow for understanding of results, 
-but for further details see Section refstatmethods Statistical Methods. For each of the outcome variables of interest 
-we build a set of linear models using the appropriate subset of predictors. Each relationship is modeled 
+A summary of the statistical methods used is presented here to allow for understanding of results. For further details see 
+Section 4: Statistical Methods. For each of the outcome variables of interest a set of linear models using the appropriate subset 
+of predictors was built. Each relationship was modeled 
 using Forward Selection and ElasticNet regression. Forward Selection fits a linear model by progressively adding variables to 
-the model until a best fit is found. This results in only some of the variables being included, chosen in a discrete manner. 
+the model until a best fit is found. This results in only some of the variables being included, chosen in a discrete manner (computed using the R package `leaps' \cite{lumley}). 
 ElasticNet regression fits a linear model by limiting the size of the coefficients so that they are smaller than in standard least 
 squares, and for many variables actually shrunken to zero. Similar to Forward Selection this results in a smaller model, but 
-variable selection can be carefully tuned as optimization is done in a more continuous way. In general, these techniques have 
-slightly different aims. Forward Selection chooses a model that best explains the variance in the dataset at hand. Elasticnet 
-chooses a model that can best make predictions on new data. Depending on the goals of analysis, one technique is not 
-necessarily better so we do not compare the two quantitatively, but instead offer both results as varying perspectives on 
-variable selection. While a variable being chosen by both methods provides stronger evidence that an important relationship exists, disagreement should suggest exploring both possibilities instead of one method necessarily being incorrect.
+variable selection can be carefully tuned as optimization is done in a more continuous way (computed using the R package `glmnet' \cite{friedman}).
+
+In general, these techniques have slightly different aims. Forward Selection chooses a model that best explains the variance in 
+the dataset at hand. Elasticnet chooses a model that can best make predictions on new data. Depending on the goals of 
+analysis, one technique is not necessarily better so we do not compare the two quantitatively, but instead offer both results as 
+varying perspectives on variable selection. While a variable being chosen by both methods provides stronger evidence that an 
+important relationship exists, disagreement suggests exploring both possibilities instead of one method necessarily being 
+incorrect.
 
 \section{Results}
 
@@ -124,7 +141,7 @@ variable selection. While a variable being chosen by both methods provides stron
 
 The first three outcome variables of interest can be grouped together under the category of farm success; labeled as 
 productivity, net income and number of workers supported. Productivity is calculated as the total pounds of crops and livestock 
-produced divided by the farm surface area. Net income is calculated as the the earnings from all products 
+produced divided by the farm surface area. Net income is calculated as the the revenue from all products 
 sold minus total expenses. Number of workers supported is calculated as the total labor expenditures divided by a standard 
 full-time worker's salary.
 
@@ -133,118 +150,120 @@ full-time worker's salary.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 0.8\textwidth]{production_histograms.pdf}
-\caption{Histogram of Productivity...}
+\caption{Histogram of Productivity, from left to right showing the full range, between 0-10,000 lbs/hectare, and the log transformed nonzero values. The log transformed values exhibit the desired normal shape.}
 \label{figure:prod_hist}
 \end{figure}
 
 The histograms of the Productivity variable (Figure \ref{figure:prod_hist}) show a strong skewness, both when looking at all 
 observations, and when zooming into observations between 0-10,000 lbs/hectare. To achieve a distribution closer to normal 
-(bell-curved), which will benefit the linear model, we take the $log_{10}$ transformation with resulting data shown in the last 
-plot. Since the log transformation cannot be performed on zero values, we remove the ?? occasions of this from the dataset. 
+(bell-curved), which will benefit the linear model, we took the $log_{10}$ transformation with resulting data shown in the last 
+plot. Since the log transformation cannot be performed on zero values, we removes the 38 occasions of this from the dataset. 
 Beyond the mathematical constraint, farms with zero production perhaps are not farms as typically defined.
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{lc|cl}\hline%
+\begin{tabular}{cc}
 \bfseries \underline{Elasticnet} & \bfseries \underline{Forward~Selection} 
 \csvreader[head to column names]{production_top5names.csv}{}%
 {\\\elasticnet & \forward}%
-\\\hline
 \end{tabular}
-\caption{Modeling of Productivity, Top 5 features for each of the three methods}
+\caption{Modeling of Productivity, Top 5 features for both methods}
 \label{table:prod_top5}
 \end{table}
 
-We build linear models using both methods, Elasticnet and Forward Selection, on the log-transformed 
+We built linear models using both methods, Elasticnet and Forward Selection, on the log-transformed 
 productivity variable, recording an optimal model of any size and the best 5 variable model for each. The size of 5 variables is 
-chosen for its interpretability and not for any specific statistical property. The results of the best 5 variable model are shown in 
-Table \ref{table:prod_top5}, listed in alphabetical order.  Next to variable names the direction of the relationship is indicated with 
-a (+) or (-). There is some overlap between the variables selected by each of the methods, but also unique choices made by 
-each method. The Root Mean-Squared Error (RMSE) for the 5 variable model Elasticnet model is 0.78 and the $R^2$ for 
+chosen to provide quick insight and not for any specific statistical property. The results of the best 5 variable model are shown 
+in Table \ref{table:prod_top5}, listed in alphabetical order.  Next to variable names the direction of the relationship is indicated 
+with a (+) or (-). There is some overlap between the variables selected by each of the methods, but also unique choices made 
+by each method. The Root Mean-Squared Error (RMSE) for the 5 variable Elasticnet model is 0.78 and the $R^2$ for 
 Forward Selection is 0.48. The RMSE is on average how far the predicted value is from the actual value and $R^2$ is the 
-percentage of variability in the outcome variable is explained by the model.
+percentage of variability in the outcome variable that is explained by the model. To provide context for the RMSE, we can look 
+at the point furthest to the right on the cross-validation plot and see how the model would perform when no variables are 
+included in the model, that is just predicting the average outcome value.
 
-Plots from the optimal models for Elasticnet and Forward Selection are shown in Figure \ref{figure:prod_opt}. The cross-validation plot for Elasticnet can be understood as follows: the 
+
+Plots from the optimal models for Elasticnet and Forward Selection are shown in Figure \ref{figure:prod_opt}. The cross-
+validation plot for Elasticnet can be understood as follows: the 
 horizontal axis shows the number of variables included in the model (on top) and the corresponding lambda ($\lambda$) value 
 (on the bottom), the vertical axis shows the Mean-Squared Error (MSE) represented as the red dots and surrounded by bars 
 showing the standard deviation. The vertical dashed line to the left, $\lambda_{min}$, is found at the minimum MSE and the 
 vertical dashed line to the right, $\lambda_{1se}$ is at the largest lambda within one standard error of the minimum. The idea 
 behind $\lambda_{1se}$ is that similar error performance can be achieved with a smaller model, in this case a model with 40 
-less variables. Since our goal is to select a small amount of variables, we will generally use the model found at $\lambda_{1se}
-$. For Forward Selection the plot is much more straightforward, we plot the number of variables included versus the 
-information criterion that we would like to minimize and mark the optimal point in red.
+fewer variables. Since our goal is to select a small amount of variables, we will generally use the model found at $
+\lambda_{1se}$. For Forward Selection the plot is much more straightforward, we plot the number of variables included versus 
+the information criterion that we choose to minimize and mark the optimal point in red.
+
+\begin{figure}[h]
+\begin{subfigure}[b]{0.5\textwidth}
+\includegraphics[width=\textwidth]{elastic_cv_production.pdf}
+\caption{Cross-validation plot for Elasticnet}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.5\textwidth}
+\includegraphics[width=\textwidth]{forward_nvars_production.pdf}
+\caption{Forward Selection plot}
+\end{subfigure}
+\caption{Productivity Variable Selection. The Elasticnet plot shows a desirable "U" shape where a moderate number of variables provides a significant improvement in prediction error. The optimal Forward Selection model includes 26 variables.}
+\label{figure:prod_opt}
+\end{figure}
 
 The convex shape of the plots highlights a common trend in variable selection; not including enough variables does not provide 
 enough information, but beyond a certain point adding more variables may not be worth the added complexity. The optimal 
 model chosen for Elasticnet includes 45 variables (not counting the intercept term) and using Forward Selection we choose a 
 model of 26 variables, almost all of which are also included in the Elasticnet model. The coefficients estimated for both models 
-can be found in Table \ref{table:prod_full} in the Appendix. For the full models the RMSE and $R^2$ are 0.61 and 0.63 
+can be found in Table \ref{table:prod_full} in the Appendix. For the full models, the RMSE and $R^2$ are 0.61 and 0.63, 
 respectively. These numbers suggest that while the 5 variable model is helpful, there is a decent amount of information to be 
 gained by adding more variables. Diagnostics of the linear fit of the optimal Elasticnet and Forward Selection models (plots shown in Figure \ref{figure:resids_prod} in the Appendix) do not raise any concerns. 
 
-\begin{figure}[!tbp]
-\begin{subfigure}[b]{0.5\textwidth}
-\includegraphics[width=\textwidth]{elastic_cv_production.pdf}
-\caption{Cross-validation plots for Elasticnet...}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.5\textwidth}
-\includegraphics[width=\textwidth]{forward_nvars_production.pdf}
-\caption{Number of variables Forward Selection plots...}
-\end{subfigure}
-\caption{Production Variable Selection}
-\label{figure:prod_opt}
-\end{figure}
+
 
 \subsubsection{Net Income}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width = 0.75\textwidth]{netincome_histograms.pdf}
-\caption{Histogram of Net Income...}
+\caption{Histograms of Net Income, with full data and data within one standard deviation displayed. The values very far from the center are of concern when modeling.}
 \label{figure:netincome_hist}
 \end{figure}
 
 The histograms for Net Income (Figure \ref{figure:netincome_hist}) show a symmetric shape, but a very spiky center and a few 
-observations wide in the tails. We attempt to fit a model on the full dataset, but find the observations with large absolute 
-values are obscuring other possible information in the model. We then remove the 28 observations that are beyond one 
-standard deviation (30,478) from the mean in either direction. The following models are fit on this reduced dataset of 727 
-observations.
+observations wide in the tails. We attempted to fit a model on the full dataset, but find the observations with large absolute 
+values are obscuring other possible information in the model. After trying several cutoff thresholds and examining model fit, we  removed the 28 observations that are beyond one standard deviation (30,478) from the mean in either direction. The 
+following models are fit on this reduced dataset of 727 observations.
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{c|c|c}\hline%
+\begin{tabular}{cc}
 \bfseries \underline{Elasticnet} & \bfseries \underline{Forward~Selection}
 \csvreader[head to column names]{netincome_top5names.csv}{}%
 {\\\elasticnet & \forward}%
-\\\hline
 \end{tabular}
-\caption{Modeling of Net Income, Top 5 features for each of the three methods}
+\caption{Modeling of Net Income, Top 5 features for both methods}
 \label{table:netincome_top5}
 \end{table}
 
-The results of the best 5 variable model are shown in \ref{table:netincome_top5}, with a RMSE of 5790.35 for Elasticnet and a $R^2$ of 0.15 for Forward Selection. For interpretation of the RMSE it is important to keep in mind the scale for Net Income is much larger than that of log productivity.
-
+The results of the best 5 variable model are shown in Table \ref{table:netincome_top5}, with a RMSE of 5790.35 for Elasticnet and a $R^2$ of 0.15 for Forward Selection. For interpretation of the RMSE it is important to keep in mind the scale for Net Income is much larger than that of log productivity. However, in this case adding variables has caused a minimal decrease in the error.
 \begin{figure}[!tbp]
 \begin{subfigure}[b]{0.5\textwidth}
 \includegraphics[width=\textwidth]{elastic_cv_netincome.pdf}
-\caption{Cross-validation plots for Elasticnet...}
+\caption{Cross-validation plot for Elasticnet...}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.5\textwidth}
 \includegraphics[width=\textwidth]{forward_nvars_netincome.pdf}
-\caption{Number of variables Forward Selection plots...}
+\caption{Forward Selection plot}
 \end{subfigure}
-\caption{Net Income Variable Selection}
+\caption{Net Income Variable Selection. The Elasticnet plot shows a much smaller improvement in prediction error and Forward Selection includes a small number of variables.}
 \label{figure:netincome_opt}
 \end{figure}
 
 The cross-validation plot for Net Income show wider error bars throughout the range of model sizes and just using the average 
 Net Income would predict nearly as well as any other model. Since here $\lambda_{1se}$ only includes the intercept, we 
-choose the optimal Elasticnet model to be at $\lambda_{min}$, which includes 9 variables. For Forward Selection, we also 
-include 9 variables, with all but two overlapping with the Elasticnet choices. The coefficents estimated for both models can be 
+chose the optimal Elasticnet model to be at $\lambda_{min}$, which includes 9 variables. For Forward Selection, we also 
+included 9 variables, with all but two overlapping with the Elasticnet choices. The coefficents estimated for both models can be 
 found in Table \ref{table:netincome_full} in the Appendix. The full models had an RMSE and $R^2$ of 5768.30 and 0.19, 
-respectively. Since the full models are not much larger than the 5 variable models, the small increases are not surprising. Diagnostics of the linear fit of the optimal Elasticnet and Forward Selection models (plots shown in Figure 
+respectively. Since the full models are not much larger than the 5 variable models, the small improvements are not surprising. Diagnostics of the linear fit of the optimal Elasticnet and Forward Selection models (plots shown in Figure 
 \ref{figure:resids_netincome} in the Appendix) do not follow assumptions as closely as for the Production models, but are not so 
 concerning as to disqualify the results. On the whole, the results from the various plots and diagnostics suggest that the relationships found for Net Income are worth investigating, but that a linear relationship is not very strong.
 
@@ -254,147 +273,242 @@ concerning as to disqualify the results. On the whole, the results from the vari
 \begin{figure}[h]
 \centering
 \includegraphics[width = 0.75\textwidth]{worker_histograms.pdf}
-\caption{Histogram of Workers...}
+\caption{Histograms of Workers, showing the proportion of zeroes, farms with nonzero workers, and the log transformed number of workers. The log transformation helps remove the skewness, but some bi-modality still remains.}
 \label{figure:workers_hist}
 \end{figure}
 
 The first plot in Figure \ref{figure:workers_hist} shows that a large percentage of the farms are not able to support any workers. 
-For this reason, we divide up the modeling task for this outcome variable. First, we use logistic regression to model the binary 
-variable of whether a farm supports more than zero or zero workers. Secondly, we use linear regression to model the quantity 
-of workers for just those 264 farms with a positive number of workers supported.
+For this reason, we divided up the modeling task for this outcome variable. First, we used logistic regression to model the 
+binary variable of whether a farm supports zero or more than zero workers. Secondly, we used linear regression to model the 
+quantity of workers for just those 264 farms with a positive number of workers supported.
+
+
 
 \begin{table}[h]
 \centering
-\begin{tabular}{c|c|c}\hline%
+\begin{tabular}{cc}
 \bfseries \underline{Elasticnet} & \bfseries \underline{Forward~Selection}
 \csvreader[head to column names]{workers_binary_top5names.csv}{}%
 {\\\elasticnet & \forward}%
-\\\hline
 \end{tabular}
 \caption{Modeling of Binary Workers , Top 5 features for each method}
 \label{table:workers_binary_top5}
 \end{table}
 
-\begin{table}[h!]
+\begin{table}[h]
 \centering
-\begin{tabular}{c|c|c}\hline%
+\begin{tabular}{cc}
 \bfseries \underline{Elasticnet} & \bfseries \underline{Forward~Selection}
 \csvreader[head to column names]{workers_nonzero_top5names.csv}{}%
 {\\\elasticnet & \forward}%
-\\\hline
+\newline
 \end{tabular}
-\caption{Modeling of Nonzero Workers , Top 5 features for each method}
+\caption{Nonzero Workers}
+\caption{Modeling of Nonzero Workers, Top 5 features for both methods}
 \label{table:workers_nonzero_top5}
 \end{table}
 
-Sometimes Elasticnet will simultaneously choose to include multiple variables at the same time, in this case there is not a 5 
+
+Sometimes Elasticnet will simultaneously choose to eliminate multiple variables at the same time, in this case there is not a 5 
 variable model so we show the 6 variable model for Elasticnet. For logistic regression we can measure performance with the 
 misclassification rate, which on average is 0.31 on the test set for Elasticnet and 0.26 on the full dataset for Forward Selection. 
-For the linear model 5 variable model the RMSE is 0.46 and the $R^2$  0.30. Several variables are found to be most helpful for both the logistic regression and linear regression models, but there is still a fair bit of difference.
+These can be compared to the 0.35 misclassification rate we would achieve if we simply predicted the majority class, zero 
+workers, every time. For the linear model 5 variable model the RMSE is 0.46 and the $R^2$  0.30. The low misclassification rate coupled with low $R^2$ show that there is a fairly clear divide between farms that can or cannot support workers, but the specific number of workers is much harder to predict. Several variables are found to be most helpful for both the logistic regression and linear regression models, but there is still a fair bit of difference.
 
-\begin{figure}[!tbp]
+\begin{figure}[h]
 \begin{subfigure}[b]{0.5\textwidth}
 \includegraphics[width=\textwidth]{elastic_cv_workers_binary.pdf}
-\caption{Cross-validation plots for Elasticnet...}
+\caption{Cross-validation plot for Elasticnet}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.5\textwidth}
 \includegraphics[width=\textwidth]{forward_nvars_workers_binary.pdf}
-\caption{Number of variables Forward Selection plots...}
+\caption{Forward Selection plot}
 \end{subfigure}
-\caption{Workers Binary Variable Selection}
+\caption{Workers Binary Variable Selection. The Elasticnet plot shows ideal predictive performance when including 5-25 variables. The computation for logistic regression Forward Selection stops at the optimal value so the rest of the plot is not included as before.}
 \label{figure:workers_binary_opt}
 \end{figure}
 
 
-\begin{figure}[!tbp]
+\begin{figure}[h]
 \begin{subfigure}[b]{0.5\textwidth}
 \includegraphics[width=\textwidth]{elastic_cv_workers_nonzero.pdf}
-\caption{Cross-validation plots for Elasticnet...}
+\caption{Cross-validation plot for Elasticnet}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.5\textwidth}
 \includegraphics[width=\textwidth]{forward_nvars_workers_nonzero.pdf}
-\caption{Number of variables Forward Selection plots...}
+\caption{Forward Selection plot}
 \end{subfigure}
-\caption{Workers Positive Variable Selection}
+\caption{Nonzero Workers Variable Selection. Both plots show that adding variables does little to improve performance, highlighting a lack of linear relationship.}
 \label{figure:workers_nonzero_opt}
 \end{figure}
 
-For logistic regression Elasticnet chooses a model of size 6 and Forward Selection chooses a model of size 7. Since these 
-models are not much larger the misclassification rates remain at 0.31 and 0.26, respectively. For linear regression, the full 
-models for Elasticnet and Forward Selection have a RMSE and $R^2$ of 0.46 and 0.34, respectively. The Elasticnet full model 
-has 5 variables and the Forward Selection full model has 8 variables.  In the Appendix, the coefficients estimated for logistic 
+For logistic regression Elasticnet chose a model of size 6 and Forward Selection chose a model of size 7. Since these 
+models are not much larger the misclassification rates remained at 0.31 and 0.26, respectively. For linear regression, the full 
+models for Elasticnet and Forward Selection had a RMSE and $R^2$ of 0.46 and 0.34, respectively. The Elasticnet full model 
+had 5 variables and the Forward Selection full model had 8 variables.  In the Appendix, the coefficients estimated for logistic 
 regression models can be found in Table \ref{table:workers_binary_full} and the coefficients estimated for linear regression 
 models can be found in Table \ref{table:workers_nonzero_full}. 
 
 \subsection{Invasive Species}
 
+The analysis of Invasive Species follows much the same pattern as for Number of Workers Supported. Again, we have a large 
+number of zeros in the outcome variable, farms with zero percent of their land covered by invasive species. We first modeled 
+this binary variable using logistic regression and then performed linear regression on the log transformed values for the farms 
+that have a percent coverage greater than zero. As can be seen in the far right plot of Figure \ref{figure:invasive_hist} there are 
+two very small values (0.005{\%} and 0.08{\%} prior to taking the log). They effect the fit of the model and are negligibly above 
+zero so we removed them from the linear model, leaving 155 farms for modeling.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
 \includegraphics[width = 0.75\textwidth]{invasive_histograms.pdf}
-\caption{Histogram of Invasive...}
+\caption{Histogram of Invasive Species. To the left: the proportion of zeroes, in the middle: farms with greater than zero, and to the right: the log transformed percent of invasive species. The two very small values on the right plot are removed.}
 \label{figure:invasive_hist}
 \end{figure}
 
+
+
 \begin{table}[h!]
 \centering
-\begin{tabular}{c|c|c}\hline%
+\begin{tabular}{cc}
 \bfseries \underline{Elasticnet} & \bfseries \underline{Forward~Selection}
 \csvreader[head to column names]{invasive_binary_top5names.csv}{}%
 {\\\elasticnet & \forward}%
-\\\hline
 \end{tabular}
 \caption{Modeling of Binary Invasive , Top 5 features for each method}
 \label{table:invasive_binary_top5}
 \end{table}
 
-
-\begin{figure}[!tbp]
-\begin{subfigure}[b]{0.5\textwidth}
-\includegraphics[width=\textwidth]{elastic_cv_invasive_binary.pdf}
-\caption{Cross-validation plots for Elasticnet...}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.5\textwidth}
-\includegraphics[width=\textwidth]{forward_nvars_invasive_binary.pdf}
-\caption{Number of variables Forward Selection plots...}
-\end{subfigure}
-\caption{Invasive Binary Variable Selection}
-\label{figure:invasive_binary_opt}
-\end{figure}
-
-
 \begin{table}[h!]
 \centering
-\begin{tabular}{c|c|c}\hline%
+\begin{tabular}{cc}
 \bfseries \underline{Elasticnet} & \bfseries \underline{Forward~Selection}
 \csvreader[head to column names]{invasive_nonzero_top5names.csv}{}%
 {\\\elasticnet & \forward}%
-\\\hline
 \end{tabular}
 \caption{Modeling of Nonzero Invasive , Top 5 features for each method}
 \label{table:invasive_nonzero_top5}
 \end{table}
 
-\begin{figure}[!tbp]
+The top 5 variable models for logistic regression and linear regression can be found in Table \ref{table:invasive_binary_top5} 
+and Table \ref{table:invasive_nonzero_top5}, respectively. For logistic regression the misclassification rate was 0.21 on the test 
+set for Elasticnet and 0.20 on the full dataset for Forward Selection. For the linear model 5 variable model the RMSE was 0.25 and the $R^2$ was 0.30.
+
+\begin{figure}[h!]
+\begin{subfigure}[b]{0.5\textwidth}
+\includegraphics[width=\textwidth]{elastic_cv_invasive_binary.pdf}
+\caption{Cross-validation plot for Elasticnet}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.5\textwidth}
+\includegraphics[width=\textwidth]{forward_nvars_invasive_binary.pdf}
+\caption{Forward Selection plots}
+\end{subfigure}
+\caption{Invasive Binary Variable Selection. The Elasticnet plot shows adding variables does not improve just predicting the majority class. In Forward Selection the BIC very quickly levels off.}
+\label{figure:invasive_binary_opt}
+\end{figure}
+
+\begin{figure}[h!]
 \begin{subfigure}[b]{0.5\textwidth}
 \includegraphics[width=\textwidth]{elastic_cv_invasive_nonzero.pdf}
-\caption{Cross-validation plots for Elasticnet...}
+\caption{Cross-validation plot for Elasticnet}
 \end{subfigure}
 \hfill
 \begin{subfigure}[b]{0.5\textwidth}
 \includegraphics[width=\textwidth]{forward_nvars_invasive_nonzero.pdf}
-\caption{Number of variables Forward Selection plots...}
+\caption{Forward Selection plots}
 \end{subfigure}
-\caption{Invasive Positive Variable Selection}
+\caption{Nonzero Invasive Variable Selection. Similar to Figure \ref{figure:invasive_binary_opt} the lack of benefit from adding additional variables demonstrates a weak linear relationship.}
 \label{figure:invasive_nonzero_opt}
 \end{figure}
 
+The cross-validation and forward selection plots in Figure \ref{figure:invasive_binary_opt} show that there was little gained from 
+adding variables to the logistic regression model. The optimal Elasticnet model only included the intercept and the optimal 
+Forward Selection model still only included 5 variables. For this reason the misclassification rates are not changed from above. 
+
+
+For linear regression the optimal models for Elasticnet included 4 variables with a RMSE still of 0.25 and for Forward Selection 
+included 7 variables with a $R^2$ slightly increasing to 0.35.  Since the percentage of farms with no invasive species is 20{\%} 
+the logistic regression was not able to do much more than just predict zero for all farms. This combined with the low 
+performance of the linear model suggests that invasive species coverage cannot be well explained by the variables considered 
+here.
 
 \subsection{Land use choices}
 
+The analysis of Land Use choice requires a slightly different approach than used previously since the outcome variable is a 
+categorical variable, with six different classifications of land use (each measured as a percentage of total land area):
+\begin{itemize}
+	\item{Permanent Crops}
+	\item{Temporary Crops}
+	\item{Fallow Land}
+	\item{Tilled Land}
+	\item{Pasture}
+	\item{Brush}
+\end{itemize}
+
+While not a perfect ordering, the classifications can generally thought of progressing from land that has been most worked by 
+the farmer to least worked. A primary concern is that unworked land may be most susceptible to invasive species growth. For 
+this reason we sort the farms in ascending order first by percent invasive species, and then by percent brush, percent pasture, 
+etc. and graph the stacked bar plots in Figure \ref{figure:landuse_plot}. Since percent brush is given precedence in sorting the 
+purple area stands out more than the rest. Even so, it can be seen that there are farms primarily made up of each of the 
+categories as well as farms fairly evenly split between the categories.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.75\textwidth]{landuse_barplot.pdf}
+\caption{Stacked Barplot of Land Use. Farms are sorted in ascending order by percent invasive and then by percbrush, percpasture, etc. Some bars do not total 100\% because percent invasive and percent other categories are not included. There appear to be different classes of farms, some primarily permanent crops, some primarily temporary crops, etc. }
+\label{figure:landuse_plot}
+\end{figure}
+
+There are multiple ways that this outcome variable can be formulated for modeling, but we decide to label each farm with its 
+highest percentage land use category. There are only 9 such farms labeled as fallow, which is too small for modeling so we 
+remove them from the consideration. The remaining categories and the number of farms are shown in Table \ref{table:landuse_cat}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lc}
+Majority Category    & Number of Farms \\
+\hline
+Percperm    & 209             \\
+Perctemp    & 50              \\
+Perctill    & 36              \\
+Percpasture & 271             \\
+Percbrush   & 189            
+\end{tabular}
+\caption{Landuse Category Count}
+\label{table:landuse_cat}
+\end{table}  	
+
+Using this derived categorical variable we used multinomial logistic regression with Elasticnet to build a model, which found an 
+optimal set of coefficients for each category. The results from the 5 variable model, which had a misclassification rate of 0.39, are shown in Table \ref{table:landuse_top5}. Different categories may have varying number of coefficients and because Perctill had no variables included at this lambda level, it is left out of the table.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cc}
+\bfseries \underline{Percperm} & \bfseries \underline{Perctemp}%
+\csvreader[head to column names]{landuse_top5names.csv}{}%
+{\\\percperm & \perctemp}%
+\end{tabular}
+\begin{tabular}{cc}
+\bfseries \underline{Percpasture} & \bfseries \underline{Percbrush}%
+\csvreader[head to column names]{landuse_top5names.csv}{}%
+{\\\percpasture & \percbrush}%
+\end{tabular}
+
+\caption{Modeling of Landuse , Top features for each category}
+\label{table:landuse_top5}
+\end{table}
+
+The plot of the Elasticnet cross-validation is shown in Figure \ref{figure:landuse_opt}. The optimal model achieves a 0.36 misclassification rate against the test set on average, which given 5 categories to choose from shows decent predictive strength. In the Appendix, the coefficients estimated for the optimal model can be found in Tables \ref{table:landuse_full_a} and 
+\ref{table:landuse_full_b}. 
+
+\begin{figure}[!tbp]
+\includegraphics[width=\textwidth]{elastic_cv_landuse.pdf}
+\caption{Land Use Cross-validation plot for Elasticnet. The Elasticnet model shows a large improvement over just predicting the majority class. Since there are now 5 categories, such a strategy would result in a 0.65 misclassification rate.}
+\hfill
+\label{figure:landuse_opt}
+\end{figure}
 
 \section{Statistical Methods} \label{stat_methods}
 
@@ -409,22 +523,21 @@ continuous values. When the outcome variable is continuous, but not normal shape
 data) it can be possible to transform the data by taking the logarithm or something similar. However, when the outcome 
 variable is discrete (such as binary labels of 1 and 0 denoting absence/presence of a feature) a further modification must be made. The outcome variable is clearly no longer normally distributed, as it is not even continuous. Without modification we could get predicted values below 0, above 1 or somewhere in between, none of which make much sense.
 
-This calls for the use of logistic regression, in which we perform a logit transformation as seen in the equation below so that the 
+This calls for the use of logistic regression, in which we perform a logit transformation as seen in equation 2 below so that the 
 $\bX\beta$ can still be mapped to a continuous scale. In some respects this is a computational concern, but it also changes the 
 way coefficients can be interpreted. For example, instead of a one unit change in $X_1$ predicting a $\beta_1$ change in the predicted $Y$, 
 in this case it predicts a $\beta_1$ change in the log odds of $Y$.
 
-\[log \frac{\Pr(Y = 1)}{\Pr(Y = 0)} = \bX\beta \]
+\[log \frac{\Pr(Y = 1)}{\Pr(Y = 0)} = \bX\beta \tag{2}\]
 
-This equation can be rewritten as below
+Equation can be rewritten as below in equation 3, which gives the predicted probability of an observation being class 1.
 
-\[ \Pr(Y = 1) = \frac{e^{\bX\beta}}{1 + e^{\bX\beta}} \]
+\[ \Pr(Y = 1) = \frac{e^{\bX\beta}}{1 + e^{\bX\beta}} \tag{3}\]
 
-Multiclass Logistic Regression
+This can be extended beyond binary variables to categorical variables when there are $K$ classes, referred to as Multinomial 
+Logistic Regression. Now to calculate the probability of class $k$, we use equation 4 below.
 
-\[ \Pr(Y = k) = \frac{e^{\bX\beta_k}}{\sum_{l=1}^{K-1} e^{\bX\beta_l}} \]
-
-% include Poisson function
+\[ \Pr(Y = k) = \frac{e^{\bX\beta_k}}{\sum_{l=1}^{K-1} e^{\bX\beta_l}} \tag{4}\]
 
 \subsection{Performance Measures}
 
@@ -468,7 +581,7 @@ performance measure like BIC or cross-validation test error.
 	\[\min_{\beta}  \|\bY - \bX\beta\|_{2}^{2} + \lambda||\beta|| \tag{LASSO}\]
 
 The above notation of $||\cdot||_{2}^{2}$ and  $||\cdot||$ are defined in general as: $||\bX||_{2}^{2} = x_1^2 + x_2^2 + ... + 
-x_n^2$ and $||\bX|| = |x_1| + |x_2| + ... + |x_n|$. As shown in equation ? in the standard linear model, we try to find the $\beta$, that is a vector of coefficients,  
+x_n^2$ and $||\bX|| = |x_1| + |x_2| + ... + |x_n|$. As shown in the top equation of the standard linear model, we try to find the $\beta$, that is a vector of coefficients,  
 that minimizes the squared difference between the true $\bY$ and the predicted $\hat{\bY}$ (which is $\beta\bX$). In 
 regularized regression we do the same thing, but also add a second term that we look to simultaneously minimize. This second 
 term adds a penalty for increasing values of $\beta$, so the two terms must be balanced. The optimal model will find a balance 
@@ -481,7 +594,7 @@ variables, leaving all of the variables in the model, but helping to offset nega
 
 \[\min_{\beta}  \|\bY - \bX\beta\|_{2}^{2} + \lambda[(1 - \alpha)||\beta||_2^2 + \alpha||\beta||] \tag{ElasticNet}\]
 
-The technique that is used in this analysis is a combination of the Ridge and LASSO penalties, called ElasticNet. As can be seen in the equation above both the square of the coefficients and the absolute value of the coefficients is included, with the contribution of each controlled by the size of $\alpha$ which takes a value between 0 and 1. ElasticNet, thus combines the favorable properties of Ridge and LASSO, in that it can achieve both sparse models and can handle correlated predictor variables. Both the $\lambda$ and the $\alpha$ can be set using cross-validation (as discussed above) to be appropriate values for the particular dataset. 
+The technique that is used in this analysis is a combination of the Ridge and LASSO penalties, called ElasticNet. As can be seen in the equation above both the square of the coefficients and the absolute value of the coefficients is included, with the contribution of each controlled by the size of alpha ($\alpha$) which takes a value between 0 and 1. ElasticNet, thus combines the favorable properties of Ridge and LASSO, in that it can achieve both sparse models and can handle correlated predictor variables. Both the $\lambda$ and the $\alpha$ can be set using cross-validation (as discussed above) to appropriate values for the particular dataset. In each Elasticnet cross-validation plot found in the Results section, the specific $\alpha$ used is labeled at the top of the graph.
 
 \section{Limitations and Future Work}
 There are a few key considerations that should be kept in mind when interpreting this analysis. First, is that relationships discovered in this analysis are correlational nature and cannot be assumed to be causal. Just because farms with a higher coverage of invasive species have lower productivity does not necessarily mean the invasive species causes lower productivity. It could be that lower productivity causes higher invasive species coverage. Or there could other factors not captured in the model that influence both productivity and invasive species. In order to determine causality, relationships of interest should be tested in a designed experiment. 
@@ -489,7 +602,7 @@ There are a few key considerations that should be kept in mind when interpreting
 Secondly, p-values and confidence intervals for coefficients were intentionally not included in the analysis. In standard 
 regression analysis we pre-specify the model and then test which variables are found to be significant. However, when using 
 Elasticnet and Forward Selection like we have done here, we do not specify the model ahead of time, but instead let the data 
-decide the model. This violates the significance test assumption and can lead to misleadingly small p-values. While there are some advanced techniques to try to adjust for this, it is recommended to view the results in this report as an exploratory analysis rather than definitive evidence.
+decide the model. This violates the significance test assumption and can lead to misleadingly small p-values (see Chapter 6 of \cite{hastie}). While there are some advanced techniques to try to adjust for this, it is recommended to view the results in this report as an exploratory analysis rather than definitive evidence.
 
 Future analysis might look to explore better fitting relationships, particularly for the outcome variables that had poor RMSE and $R^2$ values. The relationships modeled in this report only considered linear combinations of predictor variables to predict/explain the outcome variables. Modifications could include adding interaction terms (i.e., $x_1x_2$) or nonlinear terms (i.e., $x_1^2$ or binary transformations $x_1 > 10$). Exploring all possible modifications of this type is not computationally feasible, but with domain knowledge a subset of theorized relationships could be tested. Lastly, the variables used here primarily covered socioeconomic dimensions. The addition of physical and biotic variables may help better predict/explain the outcome variables or may change the importance of previously highlighted socioeconomic variables.
 
@@ -500,6 +613,23 @@ Future analysis might look to explore better fitting relationships, particularly
 
 \begin{thebibliography}{99}
 
+\bibitem{census} Censo De Las Unidades De Producci\'on Agropecuaria De Gal\'apagos, sinagap.agricultura.gob.ec/pdf/censo\_galapagos/cuestionario\_censo\_upa\_galapagos.pdf.
+
+\bibitem{friedman} Friedman, J., Hastie, T., \& Tibshirani, R. (2009). glmnet: Lasso and elastic-net regularized generalized linear models. R package version, 1(4).
+
+\bibitem{hastie} Hastie, T., Tibshirani, R., \& Wainwright, M. (2015). Statistical learning with sparsity: the lasso and 
+generalizations. CRC press.
+
+\bibitem{lumley} Lumley, T., \& Miller, A. (2009). Leaps: regression subset selection. R package version 2.9. Online at http://CRAN. R-project.org/package= leaps.
+
+\bibitem{miller} Miller, B. W., Breckheimer, I., McCleary, A. L., Guzm\'an-Ramirez, L., Caplow, S. C., Jones-Smith, J. C., \& Walsh, S. J. (2010). Using stylized agent-based models for population environment research: a case study from the Gal\'apagos Islands. Population and environment, 31(6), 401-426.
+
+\bibitem{valdivia}Valdivia, G., Wolford, W., \& Lu, F. (2014). Border crossings: New geographies of protection and production in the Gal\'apagos Islands. Annals of the Association of American Geographers, 104(3), 686-701.
+
+\bibitem{walsh} Walsh S.J., Mena C.F. (2013) Perspectives for the Study of the Gal\'apagos Islands: Complex Systems and Human-Environment Interactions. In: Walsh S., Mena C. (eds) Science and Conservation in the Gal\'apagos Islands. Social and Ecological Interactions in the Gal\'apagos Islands, vol 1. Springer, New York, NY
+
+\bibitem{zou} Zou, H., \& Hastie, T. (2005). Regularization and variable selection via the elastic net. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 67(2), 301-320.
+
 
 
 
@@ -508,7 +638,9 @@ Future analysis might look to explore better fitting relationships, particularly
 \section{Appendix}
 
 \begin{table}[h!]
-\begin{tabular}{l|c|c}\hline%
+\npdecimalsign{.}
+\nprounddigits{4}
+\begin{tabular}{ln{1}{4}n{1}{4}}\hline%
 \bfseries \underline{Variable} & \bfseries \underline{Elasticnet} & \bfseries \underline{Forward~Selection}
 \csvreader[head to column names]{fullcoeflist_production.csv}{}%
 {\\\variable & \elastic & \forward}%
@@ -526,7 +658,9 @@ Future analysis might look to explore better fitting relationships, particularly
 
 
 \begin{table}[h!]
-\begin{tabular}{l|c|c}\hline%
+\npdecimalsign{.}
+\nprounddigits{4}
+\begin{tabular}{ln{4}{4}n{4}{4}}\hline%
 \bfseries \underline{Variable} & \bfseries \underline{Elasticnet} & \bfseries \underline{Forward~Selection}
 \csvreader[head to column names]{fullcoeflist_netincome.csv}{}%
 {\\\variable & \elastic & \forward}%
@@ -538,12 +672,14 @@ Future analysis might look to explore better fitting relationships, particularly
 
 \begin{figure}[h]
 \includegraphics[width = \textwidth]{resids_netincome.pdf}
-\caption{Diagnostic Residual plots for Net Income. The plots of the predicted values vs. the residuals both demonstrate a desirable lack of pattern. The plots examining the normality of the residuals do not follow a diagonal line as closely as would be hoped, but not an extreme departure.}
+\caption{Diagnostic Residual plots for Net Income. The plots of the predicted values vs. the residuals both demonstrate a desirable lack of pattern. The plots examining the normality of the residuals do not follow a diagonal line as closely as would be hoped, but are not an extreme departure.}
 \label{figure:resids_netincome}
 \end{figure}
 
 \begin{table}[h!]
-\begin{tabular}{l|c|c}\hline%
+\npdecimalsign{.}
+\nprounddigits{4}
+\begin{tabular}{ln{1}{4}n{1}{4}}\hline%
 \bfseries \underline{Variable} & \bfseries \underline{Elasticnet} & \bfseries \underline{Forward~Selection}
 \csvreader[head to column names]{fullcoeflist_workers_binary.csv}{}%
 {\\\variable & \elastic & \forward}%
@@ -554,7 +690,9 @@ Future analysis might look to explore better fitting relationships, particularly
 \end{table}
 
 \begin{table}[h!]
-\begin{tabular}{l|c|c}\hline%
+\npdecimalsign{.}
+\nprounddigits{4}
+\begin{tabular}{ln{1}{4}n{1}{4}}\hline%
 \bfseries \underline{Variable} & \bfseries \underline{Elasticnet} & \bfseries \underline{Forward~Selection}
 \csvreader[head to column names]{fullcoeflist_workers_nonzero.csv}{}%
 {\\\variable & \elastic & \forward}%
@@ -566,12 +704,14 @@ Future analysis might look to explore better fitting relationships, particularly
 
 \begin{figure}[h]
 \includegraphics[width = \textwidth]{resids_workers_nonzero.pdf}
-\caption{Diagnostic Residual plots for Nonzero workers.}
+\caption{Diagnostic Residual plots for Nonzero workers. The plots of predictions versus residuals shows points bunch at the left end, but the QQ plot closely follows a diagonal line.}
 \label{figure:resids_workers_nonzero}
 \end{figure}
 
 \begin{table}[h!]
-\begin{tabular}{l|c|c}\hline%
+\npdecimalsign{.}
+\nprounddigits{4}
+\begin{tabular}{ln{1}{4}n{1}{4}}\hline%
 \bfseries \underline{Variable} & \bfseries \underline{Elasticnet} & \bfseries \underline{Forward~Selection}
 \csvreader[head to column names]{fullcoeflist_invasive_binary.csv}{}%
 {\\\variable & \elastic & \forward}%
@@ -582,7 +722,9 @@ Future analysis might look to explore better fitting relationships, particularly
 \end{table}
 
 \begin{table}[h!]
-\begin{tabular}{l|c|c}\hline%
+\npdecimalsign{.}
+\nprounddigits{4}
+\begin{tabular}{ln{1}{4}n{1}{4}}\hline%
 \bfseries \underline{Variable} & \bfseries \underline{Elasticnet} & \bfseries \underline{Forward~Selection}
 \csvreader[head to column names]{fullcoeflist_invasive_nonzero.csv}{}%
 {\\\variable & \elastic & \forward}%
@@ -594,9 +736,35 @@ Future analysis might look to explore better fitting relationships, particularly
 
 \begin{figure}[h]
 \includegraphics[width = \textwidth]{resids_invasive_nonzero.pdf}
-\caption{Diagnostic Residual plots for Nonzero Invasive.}
+\caption{Diagnostic Residual plots for Nonzero Invasive. Due to only a few variables being included in these models and some of them being discrete, the predictions occur at a limited number of distinct points.}
 \label{figure:resids_invasive_nonzero}
 \end{figure}
+
+\begin{table}[h!]
+\npdecimalsign{.}
+\nprounddigits{4}
+\begin{tabular}{ln{1}{4}n{1}{4}n{1}{4}}\hline%
+\bfseries \underline{Variable} & \bfseries \underline{Percperm} & \bfseries \underline{Perctemp} & \bfseries \underline{Perctill}%
+\csvreader[head to column names]{fullcoeflist_landuse_a.csv}{}%
+{\\\variable & \percperm & \perctemp & \perctill}%
+\\\hline
+\end{tabular}
+\caption{Full coefficient list for Landuse model}
+\label{table:landuse_full_a}
+\end{table}
+
+\begin{table}[h!]
+\npdecimalsign{.}
+\nprounddigits{4}
+\begin{tabular}{ln{1}{4}n{1}{4}}\hline%
+\bfseries \underline{Variable} & \bfseries \underline{Percpasture} & \bfseries \underline{Percbrush}%
+\csvreader[head to column names]{fullcoeflist_landuse_b.csv}{}%
+{\\\variable & \percpasture & \percbrush}%
+\\\hline
+\end{tabular}
+\caption{Full coefficient list for Landuse model (cont.)}
+\label{table:landuse_full_b}
+\end{table}
 
 \end{document}
 

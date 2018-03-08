@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  2 MAR 2018 09:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  8 MAR 2018 13:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -693,24 +693,53 @@ Package caption Info: hyperref package is loaded.
 \c@subfigure=\count130
 \c@subtable=\count131
 )
-(./paper_draft.aux)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/numprint/numprint.sty
+Package: numprint 2012/08/20 v1.39 Print numbers (HH)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/tools/array.sty
+Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen147
+\extrarowheight=\dimen148
+\NC@list=\toks28
+\extratabsurround=\skip56
+\backup@length=\skip57
+)
+\c@nprt@mantissa@digitsbefore=\count132
+\c@nprt@mantissa@digitsafter=\count133
+\c@nprt@exponent@digitsbefore=\count134
+\c@nprt@exponent@digitsafter=\count135
+\nprt@digitwidth=\skip58
+\nprt@sepwidth=\skip59
+\nprt@decimalwidth=\skip60
+\nprt@blockwidth=\skip61
+\nprt@digittoks=\toks29
+\nprt@pretoks=\toks30
+\nprt@posttoks=\toks31
+\nprt@thisdigit=\count136
+\nprt@curpos=\count137
+\nprt@rndpos=\count138
+\c@nprt@digitsfirstblock=\count139
+\c@nprt@blockcnt=\count140
+\c@nprt@cntprint=\count141
+
+No configuration file `numprint.cfg' found.) (./paper_draft.aux)
 \openout1 = `paper_draft.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 52.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 53.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
@@ -782,24 +811,24 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \AtBeginShipoutBox=\box28
-Package hyperref Info: Link coloring OFF on input line 52.
+Package hyperref Info: Link coloring OFF on input line 53.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count132
+\c@section@level=\count142
 )
-LaTeX Info: Redefining \ref on input line 52.
-LaTeX Info: Redefining \pageref on input line 52.
-LaTeX Info: Redefining \nameref on input line 52.
+LaTeX Info: Redefining \ref on input line 53.
+LaTeX Info: Redefining \pageref on input line 53.
+LaTeX Info: Redefining \nameref on input line 53.
 
 (./paper_draft.out) (./paper_draft.out)
 \@outlinefile=\write4
 \openout4 = `paper_draft.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 52.
+LaTeX Info: Redefining \microtypecontext on input line 53.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -815,17 +844,17 @@ File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 )
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count133
-\scratchdimen=\dimen147
+\scratchcounter=\count143
+\scratchdimen=\dimen149
 \scratchbox=\box29
-\nofMPsegments=\count134
-\nofMParguments=\count135
-\everyMPshowfont=\toks28
-\MPscratchCnt=\count136
-\MPscratchDim=\dimen148
-\MPnumerator=\count137
-\makeMPintoPDFobject=\count138
-\everyMPtoPDFconversion=\toks29
+\nofMPsegments=\count144
+\nofMParguments=\count145
+\everyMPshowfont=\toks32
+\MPscratchCnt=\count146
+\MPscratchDim=\dimen150
+\MPnumerator=\count147
+\makeMPintoPDFobject=\count148
+\everyMPtoPDFconversion=\toks33
 ) (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -844,13 +873,13 @@ e
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 55.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 56.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 55.
+LaTeX Font Info:    Try loading font information for U+msa on input line 56.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -858,7 +887,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/local/texlive/2016/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 55.
+LaTeX Font Info:    Try loading font information for U+msb on input line 56.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -867,79 +896,91 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 55.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 56.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 55.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 56.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 76.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 76.
  [1
 
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-<images/production_histograms.pdf, id=100, 867.24pt x 578.16pt>
+<images/production_histograms.pdf, id=111, 867.24pt x 578.16pt>
 File: images/production_histograms.pdf Graphic file (type pdf)
 
 <use images/production_histograms.pdf>
-Package pdftex.def Info: images/production_histograms.pdf used on input line 13
-5.
+Package pdftex.def Info: images/production_histograms.pdf used on input line 15
+2.
 (pdftex.def)             Requested size: 317.9892pt x 211.99265pt.
  [3 <./images/production_histograms.pdf>] <images/elastic_cv_production.pdf, id
-=121, 867.24pt x 578.16pt>
+=127, 867.24pt x 578.16pt>
 File: images/elastic_cv_production.pdf Graphic file (type pdf)
 
 <use images/elastic_cv_production.pdf>
-Package pdftex.def Info: images/elastic_cv_production.pdf used on input line 18
-7.
+Package pdftex.def Info: images/elastic_cv_production.pdf used on input line 19
+9.
 (pdftex.def)             Requested size: 198.7425pt x 132.48878pt.
 
-<images/forward_nvars_production.pdf, id=122, 867.24pt x 578.16pt>
+<images/forward_nvars_production.pdf, id=128, 867.24pt x 578.16pt>
 File: images/forward_nvars_production.pdf Graphic file (type pdf)
 
 <use images/forward_nvars_production.pdf>
 Package pdftex.def Info: images/forward_nvars_production.pdf used on input line
- 192.
+ 204.
 (pdftex.def)             Requested size: 198.7425pt x 132.48878pt.
 
-Overfull \hbox (1.90002pt too wide) in paragraph at lines 186--195
+Overfull \hbox (1.90002pt too wide) in paragraph at lines 198--207
 [][]  [] 
  []
 
-<images/netincome_histograms.pdf, id=123, 867.24pt x 578.16pt>
+
+Underfull \vbox (badness 2772) has occurred while \output is active []
+
+ [4 <./images/elastic_cv_production.pdf> <./images/forward_nvars_production.pdf
+>]
+<images/netincome_histograms.pdf, id=153, 867.24pt x 578.16pt>
 File: images/netincome_histograms.pdf Graphic file (type pdf)
 
 <use images/netincome_histograms.pdf>
-Package pdftex.def Info: images/netincome_histograms.pdf used on input line 203
+Package pdftex.def Info: images/netincome_histograms.pdf used on input line 225
 .
 (pdftex.def)             Requested size: 298.11374pt x 198.742pt.
- [4 <./images/elastic_cv_production.pdf> <./images/forward_nvars_production.pdf
-> <./images/netincome_histograms.pdf>]
-Overfull \hbox (10.90254pt too wide) in paragraph at lines 216--222
+
+Overfull \hbox (10.90254pt too wide) in paragraph at lines 237--242
  [][] 
  []
 
-<images/elastic_cv_netincome.pdf, id=151, 867.24pt x 578.16pt>
+<images/elastic_cv_netincome.pdf, id=156, 867.24pt x 578.16pt>
 File: images/elastic_cv_netincome.pdf Graphic file (type pdf)
 
 <use images/elastic_cv_netincome.pdf>
-Package pdftex.def Info: images/elastic_cv_netincome.pdf used on input line 230
+Package pdftex.def Info: images/elastic_cv_netincome.pdf used on input line 249
 .
 (pdftex.def)             Requested size: 198.7425pt x 132.48878pt.
 
-<images/forward_nvars_netincome.pdf, id=152, 867.24pt x 578.16pt>
+<images/forward_nvars_netincome.pdf, id=157, 867.24pt x 578.16pt>
 File: images/forward_nvars_netincome.pdf Graphic file (type pdf)
 
 <use images/forward_nvars_netincome.pdf>
 Package pdftex.def Info: images/forward_nvars_netincome.pdf used on input line 
-235.
+254.
 (pdftex.def)             Requested size: 198.7425pt x 132.48878pt.
 
-Overfull \hbox (1.90002pt too wide) in paragraph at lines 229--238
+Overfull \hbox (1.90002pt too wide) in paragraph at lines 248--257
 [][]  [] 
  []
 
-<images/worker_histograms.pdf, id=155, 867.24pt x 578.16pt>
+[5 <./images/netincome_histograms.pdf>]
+<images/worker_histograms.pdf, id=174, 867.24pt x 578.16pt>
 File: images/worker_histograms.pdf Graphic file (type pdf)
 
 <use images/worker_histograms.pdf>
-Package pdftex.def Info: images/worker_histograms.pdf used on input line 256.
+Package pdftex.def Info: images/worker_histograms.pdf used on input line 275.
 (pdftex.def)             Requested size: 298.11374pt x 198.742pt.
 
 
@@ -948,194 +989,443 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<images/elastic_cv_workers_binary.pdf, id=157, 867.24pt x 578.16pt>
+[6 <./images/elastic_cv_netincome.pdf> <./images/forward_nvars_netincome.pdf> <
+./images/worker_histograms.pdf>]
+<images/elastic_cv_workers_binary.pdf, id=202, 867.24pt x 578.16pt>
 File: images/elastic_cv_workers_binary.pdf Graphic file (type pdf)
 
 <use images/elastic_cv_workers_binary.pdf>
 Package pdftex.def Info: images/elastic_cv_workers_binary.pdf used on input lin
-e 297.
+e 320.
 (pdftex.def)             Requested size: 198.7425pt x 132.48878pt.
 
-<images/forward_nvars_workers_binary.pdf, id=158, 867.24pt x 578.16pt>
+<images/forward_nvars_workers_binary.pdf, id=203, 867.24pt x 578.16pt>
 File: images/forward_nvars_workers_binary.pdf Graphic file (type pdf)
 
 <use images/forward_nvars_workers_binary.pdf>
 Package pdftex.def Info: images/forward_nvars_workers_binary.pdf used on input 
-line 302.
+line 325.
 (pdftex.def)             Requested size: 198.7425pt x 132.48878pt.
 
-Overfull \hbox (1.90002pt too wide) in paragraph at lines 296--305
+Overfull \hbox (1.90002pt too wide) in paragraph at lines 319--328
 [][]  [] 
  []
 
-<images/elastic_cv_workers_nonzero.pdf, id=159, 867.24pt x 578.16pt>
+<images/elastic_cv_workers_nonzero.pdf, id=204, 867.24pt x 578.16pt>
 File: images/elastic_cv_workers_nonzero.pdf Graphic file (type pdf)
 
 <use images/elastic_cv_workers_nonzero.pdf>
 Package pdftex.def Info: images/elastic_cv_workers_nonzero.pdf used on input li
-ne 312.
+ne 335.
 (pdftex.def)             Requested size: 198.7425pt x 132.48878pt.
 
-<images/forward_nvars_workers_nonzero.pdf, id=160, 867.24pt x 578.16pt>
+<images/forward_nvars_workers_nonzero.pdf, id=205, 867.24pt x 578.16pt>
 File: images/forward_nvars_workers_nonzero.pdf Graphic file (type pdf)
 
 <use images/forward_nvars_workers_nonzero.pdf>
 Package pdftex.def Info: images/forward_nvars_workers_nonzero.pdf used on input
- line 317.
+ line 340.
 (pdftex.def)             Requested size: 198.7425pt x 132.48878pt.
 
-Overfull \hbox (1.90002pt too wide) in paragraph at lines 311--320
+Overfull \hbox (1.90002pt too wide) in paragraph at lines 334--343
 [][]  [] 
  []
 
-[5 <./images/elastic_cv_netincome.pdf> <./images/forward_nvars_netincome.pdf>]
-[6 <./images/worker_histograms.pdf> <./images/elastic_cv_workers_binary.pdf> <.
-/images/forward_nvars_workers_binary.pdf>]
-<images/invasive_histograms.pdf, id=211, 867.24pt x 578.16pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7 <./images/elastic_cv_workers_binary.pdf> <./images/forward_nvars_workers_bi
+nary.pdf>]
+<images/invasive_histograms.pdf, id=232, 867.24pt x 578.16pt>
 File: images/invasive_histograms.pdf Graphic file (type pdf)
 
 <use images/invasive_histograms.pdf>
-Package pdftex.def Info: images/invasive_histograms.pdf used on input line 336.
+Package pdftex.def Info: images/invasive_histograms.pdf used on input line 365.
 
 (pdftex.def)             Requested size: 298.11374pt x 198.742pt.
 
-<images/elastic_cv_invasive_binary.pdf, id=212, 867.24pt x 578.16pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<images/elastic_cv_invasive_binary.pdf, id=235, 867.24pt x 578.16pt>
 File: images/elastic_cv_invasive_binary.pdf Graphic file (type pdf)
 
 <use images/elastic_cv_invasive_binary.pdf>
 Package pdftex.def Info: images/elastic_cv_invasive_binary.pdf used on input li
-ne 356.
+ne 400.
 (pdftex.def)             Requested size: 198.7425pt x 132.48878pt.
 
-<images/forward_nvars_invasive_binary.pdf, id=213, 867.24pt x 578.16pt>
+<images/forward_nvars_invasive_binary.pdf, id=236, 867.24pt x 578.16pt>
 File: images/forward_nvars_invasive_binary.pdf Graphic file (type pdf)
 
 <use images/forward_nvars_invasive_binary.pdf>
 Package pdftex.def Info: images/forward_nvars_invasive_binary.pdf used on input
- line 361.
+ line 405.
 (pdftex.def)             Requested size: 198.7425pt x 132.48878pt.
 
-Overfull \hbox (1.90002pt too wide) in paragraph at lines 355--364
+Overfull \hbox (1.90002pt too wide) in paragraph at lines 399--408
 [][]  [] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/elastic_cv_invasive_nonzero.pdf, id=214, 867.24pt x 578.16pt>
+<images/elastic_cv_invasive_nonzero.pdf, id=237, 867.24pt x 578.16pt>
 File: images/elastic_cv_invasive_nonzero.pdf Graphic file (type pdf)
 
 <use images/elastic_cv_invasive_nonzero.pdf>
 Package pdftex.def Info: images/elastic_cv_invasive_nonzero.pdf used on input l
-ine 383.
+ine 414.
 (pdftex.def)             Requested size: 198.7425pt x 132.48878pt.
 
-<images/forward_nvars_invasive_nonzero.pdf, id=215, 867.24pt x 578.16pt>
+<images/forward_nvars_invasive_nonzero.pdf, id=238, 867.24pt x 578.16pt>
 File: images/forward_nvars_invasive_nonzero.pdf Graphic file (type pdf)
 
 <use images/forward_nvars_invasive_nonzero.pdf>
 Package pdftex.def Info: images/forward_nvars_invasive_nonzero.pdf used on inpu
-t line 388.
+t line 419.
 (pdftex.def)             Requested size: 198.7425pt x 132.48878pt.
 
-Overfull \hbox (1.90002pt too wide) in paragraph at lines 382--391
+Overfull \hbox (1.90002pt too wide) in paragraph at lines 413--422
 [][]  [] 
  []
 
 
-Underfull \vbox (badness 1297) has occurred while \output is active []
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
- [7 <./images/elastic_cv_workers_nonzero.pdf> <./images/forward_nvars_workers_n
-onzero.pdf> <./images/invasive_histograms.pdf>] [8 <./images/elastic_cv_invasiv
-e_binary.pdf> <./images/forward_nvars_invasive_binary.pdf> <./images/elastic_cv
-_invasive_nonzero.pdf> <./images/forward_nvars_invasive_nonzero.pdf>] [9] [10]
+[8 <./images/elastic_cv_workers_nonzero.pdf> <./images/forward_nvars_workers_no
+nzero.pdf> <./images/invasive_histograms.pdf>] [9 <./images/elastic_cv_invasive
+_binary.pdf> <./images/forward_nvars_invasive_binary.pdf> <./images/elastic_cv_
+invasive_nonzero.pdf> <./images/forward_nvars_invasive_nonzero.pdf>]
+<images/landuse_barplot.pdf, id=302, 867.24pt x 578.16pt>
+File: images/landuse_barplot.pdf Graphic file (type pdf)
 
-LaTeX Warning: Empty `thebibliography' environment on input line 506.
+<use images/landuse_barplot.pdf>
+Package pdftex.def Info: images/landuse_barplot.pdf used on input line 459.
+(pdftex.def)             Requested size: 298.11374pt x 198.742pt.
+ [10 <./images/landuse_barplot.pdf>]
+<images/elastic_cv_landuse.pdf, id=319, 867.24pt x 578.16pt>
+File: images/elastic_cv_landuse.pdf Graphic file (type pdf)
 
+<use images/elastic_cv_landuse.pdf>
+Package pdftex.def Info: images/elastic_cv_landuse.pdf used on input line 507.
+(pdftex.def)             Requested size: 397.48499pt x 264.99522pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11 <./images/elastic_cv_landuse.pdf>] [12] [13]
+Underfull \hbox (badness 10000) in paragraph at lines 616--617
+[]\T1/ptm/m/n/9 (+20) Censo De Las Unidades De Pro-duc-ción Agropecuaria De Gal
+á-pa-gos, sina-
+ []
+
+Package numprint Info: No number in tabular cell on input line 644.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
+Package numprint Info: No number in tabular cell on input line 646.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/resids_production.pdf, id=293, 867.24pt x 578.16pt>
+<images/resids_production.pdf, id=351, 867.24pt x 578.16pt>
 File: images/resids_production.pdf Graphic file (type pdf)
 
 <use images/resids_production.pdf>
-Package pdftex.def Info: images/resids_production.pdf used on input line 522.
+Package pdftex.def Info: images/resids_production.pdf used on input line 654.
 (pdftex.def)             Requested size: 397.48499pt x 264.99522pt.
 
 
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+Package numprint Info: No number in tabular cell on input line 664.
+Package numprint Info: No number in tabular cell on input line 666.
+Package numprint Info: No number in tabular cell on input line 666.
+Package numprint Info: No number in tabular cell on input line 666.
+
+Package numprint Warning: mantissa exceeds reserved space before
+(numprint)                decimal sign on input line 666.
+
+
+Package numprint Warning: mantissa exceeds reserved space before
+(numprint)                decimal sign on input line 666.
+
+
+Package numprint Warning: mantissa exceeds reserved space before
+(numprint)                decimal sign on input line 666.
+
+
+Package numprint Warning: mantissa exceeds reserved space before
+(numprint)                decimal sign on input line 666.
+
+Package numprint Info: No number in tabular cell on input line 666.
+Package numprint Info: No number in tabular cell on input line 666.
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/resids_netincome.pdf, id=294, 867.24pt x 578.16pt>
+<images/resids_netincome.pdf, id=352, 867.24pt x 578.16pt>
 File: images/resids_netincome.pdf Graphic file (type pdf)
 
 <use images/resids_netincome.pdf>
-Package pdftex.def Info: images/resids_netincome.pdf used on input line 540.
+Package pdftex.def Info: images/resids_netincome.pdf used on input line 674.
 (pdftex.def)             Requested size: 397.48499pt x 264.99522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+Package numprint Info: No number in tabular cell on input line 683.
+Package numprint Info: No number in tabular cell on input line 685.
+Package numprint Info: No number in tabular cell on input line 685.
+Package numprint Info: No number in tabular cell on input line 685.
+Package numprint Info: No number in tabular cell on input line 685.
+Package numprint Info: No number in tabular cell on input line 685.
+Package numprint Info: No number in tabular cell on input line 685.
+Package numprint Info: No number in tabular cell on input line 685.
+Package numprint Info: No number in tabular cell on input line 685.
+Package numprint Info: No number in tabular cell on input line 685.
+Package numprint Info: No number in tabular cell on input line 685.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+Package numprint Info: No number in tabular cell on input line 696.
+Package numprint Info: No number in tabular cell on input line 698.
+Package numprint Info: No number in tabular cell on input line 698.
+Package numprint Info: No number in tabular cell on input line 698.
+Package numprint Info: No number in tabular cell on input line 698.
+Package numprint Info: No number in tabular cell on input line 698.
+Package numprint Info: No number in tabular cell on input line 698.
+Package numprint Info: No number in tabular cell on input line 698.
+Package numprint Info: No number in tabular cell on input line 698.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/resids_workers_nonzero.pdf, id=295, 867.24pt x 578.16pt>
+<images/resids_workers_nonzero.pdf, id=353, 867.24pt x 578.16pt>
 File: images/resids_workers_nonzero.pdf Graphic file (type pdf)
 
 <use images/resids_workers_nonzero.pdf>
-Package pdftex.def Info: images/resids_workers_nonzero.pdf used on input line 5
-68.
+Package pdftex.def Info: images/resids_workers_nonzero.pdf used on input line 7
+06.
 (pdftex.def)             Requested size: 397.48499pt x 264.99522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+Package numprint Info: No number in tabular cell on input line 715.
+Package numprint Info: No number in tabular cell on input line 717.
+Package numprint Info: No number in tabular cell on input line 717.
+Package numprint Info: No number in tabular cell on input line 717.
+Package numprint Info: No number in tabular cell on input line 717.
+
+Package numprint Warning: mantissa exceeds reserved space before
+(numprint)                decimal sign on input line 717.
+
+
+Package numprint Warning: mantissa exceeds reserved space before
+(numprint)                decimal sign on input line 717.
+
+
+Package numprint Warning: mantissa exceeds reserved space before
+(numprint)                decimal sign on input line 717.
+
+
+Package numprint Warning: mantissa exceeds reserved space before
+(numprint)                decimal sign on input line 717.
+
+Package numprint Info: No number in tabular cell on input line 717.
+Package numprint Info: No number in tabular cell on input line 717.
+Package numprint Info: No number in tabular cell on input line 717.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+Package numprint Info: No number in tabular cell on input line 728.
+Package numprint Info: No number in tabular cell on input line 730.
+Package numprint Info: No number in tabular cell on input line 730.
+Package numprint Info: No number in tabular cell on input line 730.
+Package numprint Info: No number in tabular cell on input line 730.
+Package numprint Info: No number in tabular cell on input line 730.
+Package numprint Info: No number in tabular cell on input line 730.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/resids_invasive_nonzero.pdf, id=296, 867.24pt x 578.16pt>
+<images/resids_invasive_nonzero.pdf, id=354, 867.24pt x 578.16pt>
 File: images/resids_invasive_nonzero.pdf Graphic file (type pdf)
 
 <use images/resids_invasive_nonzero.pdf>
 Package pdftex.def Info: images/resids_invasive_nonzero.pdf used on input line 
-596.
+738.
 (pdftex.def)             Requested size: 397.48499pt x 264.99522pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 601.
-[11 <./images/resids_production.pdf>] [12] [13 <./images/resids_netincome.pdf>]
-[14 <./images/resids_workers_nonzero.pdf>] [15 <./images/resids_invasive_nonzer
-o.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 601.
+Package numprint Info: No number in tabular cell on input line 747.
+Package numprint Info: No number in tabular cell on input line 747.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+Package numprint Info: No number in tabular cell on input line 749.
+
+Overfull \hbox (33.63078pt too wide) in paragraph at lines 746--752
+[][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+Package numprint Info: No number in tabular cell on input line 760.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+Package numprint Info: No number in tabular cell on input line 762.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 769.
+[14] [15] [16 <./images/resids_production.pdf>] [17 <./images/resids_netincome.
+pdf>] [18 <./images/resids_workers_nonzero.pdf>] [19 <./images/resids_invasive_
+nonzero.pdf>] [20] [21]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 769.
  (./paper_draft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 601.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 601.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 769.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 769.
 Package rerunfilecheck Info: File `paper_draft.out' has not changed.
 (rerunfilecheck)             Checksum: EAA1D393FAFD23A9020033E8E1653A51;1337.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 601.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 769.
  ) 
 Here is how much of TeX's memory you used:
- 11350 strings out of 493014
- 184476 string characters out of 6133351
- 322417 words of memory out of 5000000
- 14519 multiletter control sequences out of 15000+600000
- 29500 words of font info for 120 fonts, out of 8000000 for 9000
+ 11809 strings out of 493014
+ 191911 string characters out of 6133351
+ 376443 words of memory out of 5000000
+ 14923 multiletter control sequences out of 15000+600000
+ 30412 words of font info for 134 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,10n,46p,931b,430s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 45i,12n,61p,1004b,434s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/te
 xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texl
@@ -1149,10 +1439,10 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/texmf-dist/font
 s/type1/urw/times/utmr8a.pfb>
-Output written on paper_draft.pdf (15 pages, 319884 bytes).
+Output written on paper_draft.pdf (21 pages, 378098 bytes).
 PDF statistics:
- 408 PDF objects out of 1000 (max. 8388607)
- 335 compressed objects within 4 object streams
- 65 named destinations out of 1000 (max. 500000)
- 15629 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 486 PDF objects out of 1000 (max. 8388607)
+ 401 compressed objects within 5 object streams
+ 85 named destinations out of 1000 (max. 500000)
+ 15639 words of extra memory for PDF output out of 17280 (max. 10000000)
 

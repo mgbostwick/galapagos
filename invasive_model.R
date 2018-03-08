@@ -18,9 +18,10 @@ vars <-  read_excel("Variables.xlsx", sheet = "vars", range = "C2:I241")
 invasive_include <- vars[which(is.na(vars$`Surface area with invasive species`)),1]$`Variable Name`
 invasive_x.df <- subset(reduced_data, select = invasive_include)
 
-reduced_data$invasive <- 1*(reduced_data$percinv > 0)
+reduced_data$invasive <- factor(reduced_data$percinv > 0)
+levels(reduced_data$invasive) = c("Zero", "Positive")
 
-invasive_hist <- ggplot(data = reduced_data) + geom_bar(mapping = aes(x = factor(invasive)))
+invasive_hist <- ggplot(data = reduced_data) + geom_bar(mapping = aes(x = invasive))
 nonzero_hist <- ggplot(data = reduced_data[reduced_data$percinv > 0,], aes(x = percinv)) + 
   geom_histogram() + stat_bin(binwidth = 10)
 log_hist <- ggplot(data = reduced_data[reduced_data$percinv > 0,], aes(x = log10(percinv))) + 
@@ -34,9 +35,9 @@ invasive_binary.models <- fit.models(model.name = "invasive_binary", x.data = in
                                    y.response = reduced_data$invasive, response.family = "binomial")
 
 
-log_invasive_nonzero <- log10(reduced_data[reduced_data$percinv > 0, 'percinv'])
+log_invasive_nonzero <- log10(reduced_data[reduced_data$percinv > 0.1, 'percinv'])
 
-invasive.matrix <- model.matrix(~., invasive_x.df[reduced_data$invasive == 1,])[,-1]
+invasive.matrix <- model.matrix(~., invasive_x.df[reduced_data$percinv > 0.1,])[,-1]
 col_vars <- apply(invasive.matrix, 2, var)
 zero_variance <- names(col_vars[col_vars == 0])
 

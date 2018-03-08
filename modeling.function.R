@@ -2,10 +2,10 @@ fit.models <- function(model.name, x.data, y.response, response.family){
   
   # For testing
   
-  #model.name <- "workers_binary"
-  #x.data <- workers_x.df
-  #y.response <- reduced_data$workers_binary
-  #response.family <- "binomial"
+  #model.name <- "landuse"
+  #x.data <- landuse_x.df
+  #y.response <- primary_use
+  #response.family <- "multinomial"
   
   x.matrix <- model.matrix(~., x.data)[,-1]
   
@@ -24,7 +24,7 @@ fit.models <- function(model.name, x.data, y.response, response.family){
     cv.5=cv.glmnet(x.matrix,y.response,family=response.family,type.measure = "class",foldid=foldid,alpha=.5)
     cv.25=cv.glmnet(x.matrix,y.response,family=response.family,type.measure = "class",foldid=foldid,alpha=0.25)
   } 
-  if (response.family == "mgaussian") {
+  if (response.family == "multinomial") {
     cv1=cv.glmnet(x.matrix,y.response,family=response.family,type.measure = "class",foldid=foldid,alpha=1)
     cv.75=cv.glmnet(x.matrix,y.response,family=response.family,type.measure = "class",foldid=foldid,alpha=0.75)
     cv.5=cv.glmnet(x.matrix,y.response,family=response.family,type.measure = "class",foldid=foldid,alpha=.5)
@@ -94,20 +94,97 @@ fit.models <- function(model.name, x.data, y.response, response.family){
   elastic5.signs <- lapply(elastic.coef5.nonzero, sign_check)
   
   ############ Figure out what to do with matrix of coefficients #############
-  if (response.family == "multinomial"){
-    elastic.coef5 <- coef(elastic.full,s=lambda.5var[1])
-    elastic.coef5.nonzero1 <- as.data.frame(as.matrix(elastic.coef5$`1`))
-    elastic5.names1 <- names(elastic.coef5.nonzero1[elastic.coef5.nonzero != 0,])
-    elastic.coef5.nonzero2 <- as.data.frame(as.matrix(elastic.coef5$`2`))
-    elastic5.names2 <- names(elastic.coef5.nonzero2[elastic.coef5.nonzero2 != 0,])
-    elastic.coef5.nonzero3 <- as.data.frame(as.matrix(elastic.coef5$`3`))
-    elastic5.names3 <- names(elastic.coef5.nonzero3[elastic.coef5.nonzero3 != 0,])
-    elastic.coef5.nonzero4 <- as.data.frame(as.matrix(elastic.coef5$`4`))
-    elastic5.names4 <- names(elastic.coef5.nonzero4[elastic.coef5.nonzero4 != 0,])
-    elastic.coef5.nonzero5 <- as.data.frame(as.matrix(elastic.coef5$`5`))
-    elastic5.names5 <- names(elastic.coef5.nonzero5[elastic.coef5.nonzero5 != 0,])
-    
+  if (response.family == "multinomial"){elastic.coef.best <- coef(elastic.full,s=best.lambda)
+  if (best_model$lambda.1se == best_model$lambda[1]){
+    best.lambda = best_model$lambda.min
+  } else {
+    best.lambda = best_model$lambda.1se
   }
+  
+  
+  elastic.coef.best <- coef(elastic.full,s=best.lambda)
+  elastic.coef.best1 <- elastic.coef.best$`1`[1:ncol(x.matrix),] 
+  elastic.coef.best1 <- as.data.frame(elastic.coef.best1[elastic.coef.best1!=0])
+  elastic.coef.best1 <- rownames_to_column(elastic.coef.best1, "variable")
+  elastic.coef.best2 <- elastic.coef.best$`2`[1:ncol(x.matrix),] 
+  elastic.coef.best2 <- as.data.frame(elastic.coef.best2[elastic.coef.best2!=0])
+  elastic.coef.best2 <- rownames_to_column(elastic.coef.best2, "variable")
+  elastic.coef.best3 <- elastic.coef.best$`3`[1:ncol(x.matrix),] 
+  elastic.coef.best3 <- as.data.frame(elastic.coef.best3[elastic.coef.best3!=0])
+  elastic.coef.best3 <- rownames_to_column(elastic.coef.best3, "variable")
+  elastic.coef.best4 <- elastic.coef.best$`4`[1:ncol(x.matrix),] 
+  elastic.coef.best4 <- as.data.frame(elastic.coef.best4[elastic.coef.best4!=0])
+  elastic.coef.best4 <- rownames_to_column(elastic.coef.best4, "variable")
+  elastic.coef.best5 <- elastic.coef.best$`5`[1:ncol(x.matrix),] 
+  elastic.coef.best5 <- as.data.frame(elastic.coef.best5[elastic.coef.best5!=0])
+  elastic.coef.best5 <- rownames_to_column(elastic.coef.best5, "variable")
+  
+  coefs_list <- list(elastic.coef.best1,elastic.coef.best2,elastic.coef.best3,elastic.coef.best4,elastic.coef.best5)
+  
+  elastic.merged_coefs <- coefs_list %>%
+    Reduce(function(dtf1,dtf2) full_join(dtf1,dtf2,by="variable"), .)
+  
+  
+  colnames(elastic.merged_coefs) <- c("variable", 'percperm','perctemp','perctill','percpasture','percbrush') 
+  elastic.merged_coefs$variable <- gsub("[^[:alnum:] ]", "", elastic.merged_coefs$variable)
+  
+  path <- sprintf("Paper/fullcoeflist_%s.csv", model.name)
+  write.csv(elastic.merged_coefs, path, row.names = FALSE)
+  
+  best_model$cvm[21]
+  
+  elastic.coef.5 <- coef(elastic.full,s=0.05)
+  elastic.coef5.1 <- elastic.coef.5$`1`[1:ncol(x.matrix),] 
+  elastic.coef5.1 <- elastic.coef5.1[elastic.coef5.1!=0][-1]
+  elastic.coef5.2 <- elastic.coef.5$`2`[1:ncol(x.matrix),] 
+  elastic.coef5.2 <- elastic.coef5.2[elastic.coef5.2!=0][-1]
+  elastic.coef5.3 <- elastic.coef.5$`3`[1:ncol(x.matrix),] 
+  elastic.coef5.3 <- elastic.coef5.3[elastic.coef5.3!=0][-1]
+  elastic.coef5.4 <- elastic.coef.5$`4`[1:ncol(x.matrix),] 
+  elastic.coef5.4 <- elastic.coef5.4[elastic.coef5.4!=0][-1]
+  elastic.coef5.5 <- elastic.coef.5$`5`[1:ncol(x.matrix),] 
+  elastic.coef5.5 <- elastic.coef5.5[elastic.coef5.5!=0][-1]
+  
+  
+  elastic5.signs1 <- lapply(elastic.coef5.1, sign_check)
+  elastic5.signs2 <- lapply(elastic.coef5.2, sign_check)
+  elastic5.signs3 <- lapply(elastic.coef5.3, sign_check)
+  elastic5.signs4 <- lapply(elastic.coef5.4, sign_check)
+  elastic5.signs5 <- lapply(elastic.coef5.5, sign_check)
+  
+  
+  elastic5.names1 <- trimws(gsub("[^[:alnum:] ]", "", names(elastic.coef5.1)))
+  elastic5.names1 <- paste(elastic5.names1, elastic5.signs1, sep=" ") 
+  elastic5.names2 <- trimws(gsub("[^[:alnum:] ]", "", names(elastic.coef5.2)))
+  elastic5.names2 <- paste(elastic5.names2, elastic5.signs2, sep=" ") 
+  elastic5.names3 <- trimws(gsub("[^[:alnum:] ]", "", names(elastic.coef5.3)))
+  elastic5.names3 <- paste(elastic5.names3, elastic5.signs3, sep=" ") 
+  elastic5.names4 <- trimws(gsub("[^[:alnum:] ]", "", names(elastic.coef5.4)))
+  elastic5.names4 <- paste(elastic5.names4, elastic5.signs4, sep=" ") 
+  elastic5.names5 <- trimws(gsub("[^[:alnum:] ]", "", names(elastic.coef5.5)))
+  elastic5.names5 <- paste(elastic5.names5, elastic5.signs5, sep=" ") 
+  max.length <- max(length(elastic.coef5.1),length(elastic.coef5.2),length(elastic.coef5.3),length(elastic.coef5.4),
+      length(elastic.coef5.5))
+  
+  elastic.names.list <- list(elastic5.names1,elastic5.names2,elastic5.names3,elastic5.names4,elastic5.names5)
+  for (i in 1:5){
+    dif <- max.length - length(elastic.names.list[[i]])
+    elastic.names.list[[i]] <- c(sort(elastic.names.list[[i]]), rep(" ", dif))
+  }
+ 
+   
+  top5coef <- cbind(elastic.names.list[[1]],elastic.names.list[[2]],elastic.names.list[[3]],
+                    elastic.names.list[[4]],elastic.names.list[[5]])
+  colnames(top5coef) <- c('percperm','perctemp','perctill','percpasture','percbrush')
+  
+  
+  path <- sprintf("Paper/%s_top5names.csv", model.name)
+  write.csv(top5coef, path, row.names = FALSE)
+  
+  }
+    
+  
+  
   path <- sprintf("Paper/images/elastic_cv_%s.pdf", model.name)
   pdf(path,width=12,height=8)
   plot(best_model);title(main=sprintf("Alpha = %s", best_alpha), line = 2.1);
@@ -127,6 +204,9 @@ fit.models <- function(model.name, x.data, y.response, response.family){
   } else {
     best.lambda = best_model$lambda.1se
   }
+  
+
+  
   
   elastic.coef.best <- coef(elastic.full,s=best.lambda)[1:ncol(x.matrix),] 
   elastic.coef.best.nonzero <- elastic.coef.best[elastic.coef.best!=0]
@@ -270,7 +350,7 @@ fit.models <- function(model.name, x.data, y.response, response.family){
   
 
   path <- sprintf("Paper/%s_top5names.csv", model.name)
-  #write.csv(top5coef, path, row.names = FALSE)
+  write.csv(top5coef, path, row.names = FALSE)
 
   elastic.coef.best.nonzero <- as.data.frame(elastic.coef.best.nonzero)
   elastic.coef.best.nonzero <- rownames_to_column(elastic.coef.best.nonzero)
@@ -280,7 +360,7 @@ fit.models <- function(model.name, x.data, y.response, response.family){
   colnames(merged_best_coefs) <- c("variable", "elastic", "forward")
   merged_best_coefs$variable <- gsub("[^[:alnum:] ]", "", merged_best_coefs$variable)
   path <- sprintf("Paper/fullcoeflist_%s.csv", model.name)
-  #write.csv(merged_best_coefs, path, row.names = FALSE)
+  write.csv(merged_best_coefs, path, row.names = FALSE)
   
   results <- list("elastic5.cvm" = elastic5.cvm, "elastic.full.cvm" = elastic.full.cvm, 
                   "fwd5.r2" = fwd5.r2, "fwd.full.r2" = fwd.full.r2)
