@@ -21,11 +21,12 @@ invasive_x.df <- subset(reduced_data, select = invasive_include)
 reduced_data$invasive <- factor(reduced_data$percinv > 0)
 levels(reduced_data$invasive) = c("Zero", "Positive")
 
-invasive_hist <- ggplot(data = reduced_data) + geom_bar(mapping = aes(x = invasive))
+invasive_hist <- ggplot(data = reduced_data) + geom_bar(mapping = aes(x = invasive)) +
+  theme(text = element_text(size=14))
 nonzero_hist <- ggplot(data = reduced_data[reduced_data$percinv > 0,], aes(x = percinv)) + 
-  geom_histogram() + stat_bin(binwidth = 10)
+  geom_histogram() + stat_bin(binwidth = 10) + theme(text = element_text(size=14))
 log_hist <- ggplot(data = reduced_data[reduced_data$percinv > 0,], aes(x = log10(percinv))) + 
-  geom_histogram() + stat_bin(binwidth = 0.25)
+  geom_histogram() + stat_bin(binwidth = 0.25) + theme(text = element_text(size=14))
 
 pdf("Paper/images/invasive_histograms.pdf",width=12,height=8)
 grid.arrange(invasive_hist, nonzero_hist, log_hist, nrow = 1)
@@ -33,6 +34,10 @@ dev.off()
 
 invasive_binary.models <- fit.models(model.name = "invasive_binary", x.data = invasive_x.df, 
                                    y.response = reduced_data$invasive, response.family = "binomial")
+
+betas <-  invasive_binary.models$betas
+betas[abs(betas$s11)>0,'variable']
+invasive_binary.models$fwdorder
 
 
 log_invasive_nonzero <- log10(reduced_data[reduced_data$percinv > 0.1, 'percinv'])
@@ -47,6 +52,10 @@ invasive_x.nonzero <- as.data.frame(invasive_x.nonzero[,!colnames(invasive_x.non
 
 invasive_nonzero.models <- fit.models(model.name = "invasive_nonzero", x.data = invasive_x.nonzero, 
                                 y.response = log_invasive_nonzero, response.family = "gaussian")
+
+betas <-  invasive_nonzero.models$betas
+betas[abs(betas$s7)>0,'variable']
+invasive_nonzero.models$fwdorder
 
 ### Diagnostics to find linear dependencies and correlations between variables
 your.matrix <- invasive_x.nonzero

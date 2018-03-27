@@ -1,11 +1,13 @@
 fit.models <- function(model.name, x.data, y.response, response.family){
   
-  # For testing
+  source("plot.cv.big.R")
+  environment(plot.cv.big) <- asNamespace('glmnet')
   
-  #model.name <- "landuse"
-  #x.data <- landuse_x.df
-  #y.response <- primary_use
-  #response.family <- "multinomial"
+  # For testing
+  #model.name <- "production"
+  #x.data <- production_x.df
+  #y.response <- log_productivity
+  #response.family <- "gaussian"
   
   x.matrix <- model.matrix(~., x.data)[,-1]
   
@@ -31,7 +33,7 @@ fit.models <- function(model.name, x.data, y.response, response.family){
     cv.25=cv.glmnet(x.matrix,y.response,family=response.family,type.measure = "class",foldid=foldid,alpha=0.25)
   }
   
-  
+  # Determine best alpha value
   models <- vector(mode="list", length=4)
   
   models[[1]] <- cv.25
@@ -51,9 +53,8 @@ fit.models <- function(model.name, x.data, y.response, response.family){
   best_alpha <- alphas[which.min(mses)]
   
   elastic.full <- glmnet(x.matrix,y.response,family=response.family,alpha=best_alpha)
-  #lambda.seq <- c(seq(1, 0.64, by=-0.05), elastic.nvars$lambda)
-  #elastic.nvars <- glmnet(x.matrix,y.response,family=response.family,alpha=best_alpha, lambda = lambda.seq)
-
+ 
+  # Find lambda value that includes 5 variables
   found_df = FALSE
   df = 5
   while (found_df == FALSE){
@@ -65,6 +66,7 @@ fit.models <- function(model.name, x.data, y.response, response.family){
     }
   }
   
+  # Find RMSE for 5 variable model
   found_df = FALSE
   df = 5
   while (found_df == FALSE){
@@ -76,11 +78,15 @@ fit.models <- function(model.name, x.data, y.response, response.family){
     }
   }
   
+  betas <- as.data.frame(as.matrix(elastic.full$beta))
+  betas <- rownames_to_column(betas, var = "variable")
   
+  # Find variable names of first 5 variables
   elastic.coef5 <- coef(elastic.full,s=lambda.5var[1])[1:ncol(x.matrix),] 
   elastic.coef5.nonzero <- elastic.coef5[elastic.coef5!=0][-1]
   elastic5.names <- names(elastic.coef5.nonzero)
 
+  # Find direction of relationship for 5 variables
   sign_check <- function(x) {
     if (x > 0) {
       result <- "(+)"
@@ -93,7 +99,7 @@ fit.models <- function(model.name, x.data, y.response, response.family){
   
   elastic5.signs <- lapply(elastic.coef5.nonzero, sign_check)
   
-  ############ Figure out what to do with matrix of coefficients #############
+  ############ Different procedure for multinomial model #############
   if (response.family == "multinomial"){elastic.coef.best <- coef(elastic.full,s=best.lambda)
   if (best_model$lambda.1se == best_model$lambda[1]){
     best.lambda = best_model$lambda.min
@@ -142,9 +148,10 @@ fit.models <- function(model.name, x.data, y.response, response.family){
   elastic.coef5.3 <- elastic.coef5.3[elastic.coef5.3!=0][-1]
   elastic.coef5.4 <- elastic.coef.5$`4`[1:ncol(x.matrix),] 
   elastic.coef5.4 <- elastic.coef5.4[elastic.coef5.4!=0][-1]
+  #elastic.coef.5 <- coef(elastic.full,s=0.06)
   elastic.coef5.5 <- elastic.coef.5$`5`[1:ncol(x.matrix),] 
   elastic.coef5.5 <- elastic.coef5.5[elastic.coef5.5!=0][-1]
-  
+  #elastic.coef5.5
   
   elastic5.signs1 <- lapply(elastic.coef5.1, sign_check)
   elastic5.signs2 <- lapply(elastic.coef5.2, sign_check)
@@ -184,46 +191,30 @@ fit.models <- function(model.name, x.data, y.response, response.family){
   }
     
   
-  
+  # Output Elastic Net CV plot  
   path <- sprintf("Paper/images/elastic_cv_%s.pdf", model.name)
   pdf(path,width=12,height=8)
-  plot(best_model);title(main=sprintf("Alpha = %s", best_alpha), line = 2.1);
-  # par(mfrow=c(2,2))
-  # plot(cv1);title(main="Alpha = 1", line = 2.1);
-  # plot(cv.75);title(main="Alpha = .75", line = 2.1);
-  # plot(cv.5);title(main="Alpha = .5", line = 2.1);
-  # plot(cv.25);title(main="Alpha = .25", line = 2.1);
-  # par(mfrow=c(1,1))
+  par(mar=c(5,5,5,2)+0.1)
+  plot.cv.big(best_model, cex.axis = 1.5, cex.lab = 2);title(main=sprintf("Alpha = %s", best_alpha), line = 3, cex.main = 2.25);
   dev.off()
-  #plot(log(cv1$lambda),cv1$cvm,pch=19,col="red",xlab="log(Lambda)",ylab=cv1$name,  main="Alpha = 1")
-  #points(log(cv.5$lambda),cv.5$cvm,pch=19,col="grey", main="Alpha = 0.5")
-  #points(log(cv0$lambda),cv0$cvm,pch=19,col="blue", main="Alpha = 0")
-  
+
+  # Determine optimal lambda value
   if (best_model$lambda.1se == best_model$lambda[1]){
     best.lambda = best_model$lambda.min
   } else {
     best.lambda = best_model$lambda.1se
   }
   
-
-  
   
   elastic.coef.best <- coef(elastic.full,s=best.lambda)[1:ncol(x.matrix),] 
   elastic.coef.best.nonzero <- elastic.coef.best[elastic.coef.best!=0]
   elastic.best.names <- names(elastic.coef.best.nonzero)
-
   elastic.full.cvm <- best_model$cvm[best_model$lambda == best.lambda]
-
-  
   elastic.predicts <- predict(elastic.full, newx = x.matrix,  type = "response", s = best.lambda)
-  #elastic.predict_class <- predict(elastic.full, newx = x.matrix,  type = "class", s = best.lambda)
   elastic.resids <- (y.response - elastic.predicts)
   
-  #mean(y.response == elastic.predict_class)
   
-
-  
-  # Forward/Backward modeling
+  # Forward Stepwise modeling
   if (response.family == "gaussian"){
     best.fwd <- regsubsets(y.response~., data=x.data ,nvmax=min(100,nrow(x.data)),method = "forward")
     best.fwd.summary <- summary(best.fwd)
@@ -235,6 +226,7 @@ fit.models <- function(model.name, x.data, y.response, response.family){
     fwd.resids <- (y.response - fwd.predicts)
     
     fwd.coefs5 <- colnames(x.matrix)[best.fwd$vorder[1:5]]
+    fwd.order <- fwd.coefs5
     
     xdata.5 <- as.data.frame(x.matrix[,fwd.coefs5])
     fwd.fit5 <- lm(y.response ~ ., data = xdata.5)
@@ -245,7 +237,9 @@ fit.models <- function(model.name, x.data, y.response, response.family){
     
     path <- sprintf("Paper/images/forward_nvars_%s.pdf", model.name)
     pdf(path,width=12,height=8)
-    plot(best.fwd.summary$bic ,xlab="Number of Variables ",ylab="BIC", type='l')
+    par(mar=c(5,5,5,2)+0.1)
+    plot(best.fwd.summary$bic ,xlab="Number of Variables ",ylab="BIC", type='l',
+         xlim=c(length(best.fwd.summary$bic),0), cex.axis = 1.5, cex.lab = 2)
     min.bic <- which.min(best.fwd.summary$bic)
     points(min.bic,best.fwd.summary$bic[min.bic],col="red",cex=2,pch=20)
     dev.off()
@@ -261,7 +255,9 @@ fit.models <- function(model.name, x.data, y.response, response.family){
     
     path <- sprintf("Paper/images/forward_nvars_%s.pdf", model.name)
     pdf(path,width=12,height=8)
-    plot(fwd.steps$anova$AIC, type= "l", ylab = "BIC", xlab = "Number of Variables")
+    par(mar=c(5,5,5,2)+0.1)
+    plot(fwd.steps$anova$AIC, type= "l", ylab = "BIC", xlab = "Number of Variables",
+         xlim=c(length(fwd.steps$anova$AIC),0), cex.axis = 1.5, cex.lab = 2)
     points(which.min(fwd.steps$anova$AIC),min(fwd.steps$anova$AIC),col="red",cex=2,pch=20)
     dev.off()
     
@@ -270,6 +266,7 @@ fit.models <- function(model.name, x.data, y.response, response.family){
     # fwd.coefs5 <- trimws(gsub("[^[:alnum:] ]", "", fwd.coefs5))
     
     fwd.coefs5 <- names(fwd.steps$coefficients)[2:6]
+    fwd.order <- fwd.coefs5
     fwd.coefs5.signs <- lapply(fwd.steps$coefficients[2:6], sign_check)
   
     
@@ -294,35 +291,15 @@ fit.models <- function(model.name, x.data, y.response, response.family){
     path <- sprintf("Paper/images/resids_%s.pdf", model.name)
     pdf(path,width=12,height=8)
     par(mfrow=c(2,2))
-    plot(elastic.predicts, elastic.resids)
-    qqnorm(elastic.resids)
-    plot(fwd.predicts, fwd.resids)
-    qqnorm(fwd.resids)
+    par(mar=c(5,5,5,2)+0.1)
+    plot(elastic.predicts, elastic.resids, cex.axis = 1.5, cex.lab = 2, cex.main = 2,
+         main = "Elastic Net Residuals", xlab = "Predicted Values", ylab = "Residual Values")
+    qqnorm(elastic.resids,  cex.axis = 1.5, cex.lab = 2, cex.main = 2)
+    plot(fwd.predicts, fwd.resids, cex.axis = 1.5, cex.lab = 2,cex.main = 2, 
+         main = "Forward Selection Residuals", xlab = "Predicted Values", ylab = "Residual Values")
+    qqnorm(fwd.resids, cex.axis = 1.5, cex.lab = 2, cex.main = 2)
     dev.off()
     par(mfrow=c(1,1))
-  
-  
-  ### Best subset
-    # best.subset <- bs(x.matrix, y.response, k = 4, time.limit = 120)
-    # 
-    # bs.beta = coef(best.subset)
-    # bs.coef5 = apply(bs.beta != 0, 2, which)
-    # bs.coef5.names <- colnames(x.matrix)[bs.coef5]
-    # print("Best subset solution:")
-    # print(best.subset$status)
-    # 
-    # xdata.5.bs <- as.data.frame(x.matrix[,bs.coef5.names])
-    # bs.fit5 <- lm(y.response ~ ., data = xdata.5.bs)
-    # bs.coef5.names.signs <- lapply(coef(bs.fit5)[-1], sign_check)
-    # 
-    # xdata.5.elastic <- as.data.frame(x.matrix[,elastic5.names])
-    # elastic.fit5 <- lm(y.response ~ ., data = xdata.5.elastic)
-    # elastic.fit <- lm(y.response ~ x.matrix[,colnames(x.matrix) %in% elastic5.names])
-    
-
-    # bs.coef5.names <- trimws(gsub("[^[:alnum:] ]", "", bs.coef5.names))
-    # bs.coef5.names <- paste(bs.coef5.names, bs.coef5.names.signs, sep=" ") 
-    
 
   }
   
@@ -350,7 +327,7 @@ fit.models <- function(model.name, x.data, y.response, response.family){
   
 
   path <- sprintf("Paper/%s_top5names.csv", model.name)
-  write.csv(top5coef, path, row.names = FALSE)
+  #write.csv(top5coef, path, row.names = FALSE)
 
   elastic.coef.best.nonzero <- as.data.frame(elastic.coef.best.nonzero)
   elastic.coef.best.nonzero <- rownames_to_column(elastic.coef.best.nonzero)
@@ -360,10 +337,10 @@ fit.models <- function(model.name, x.data, y.response, response.family){
   colnames(merged_best_coefs) <- c("variable", "elastic", "forward")
   merged_best_coefs$variable <- gsub("[^[:alnum:] ]", "", merged_best_coefs$variable)
   path <- sprintf("Paper/fullcoeflist_%s.csv", model.name)
-  write.csv(merged_best_coefs, path, row.names = FALSE)
+  #write.csv(merged_best_coefs, path, row.names = FALSE)
   
   results <- list("elastic5.cvm" = elastic5.cvm, "elastic.full.cvm" = elastic.full.cvm, 
-                  "fwd5.r2" = fwd5.r2, "fwd.full.r2" = fwd.full.r2)
+                  "fwd5.r2" = fwd5.r2, "fwd.full.r2" = fwd.full.r2, "betas" = betas, "fwdorder" = fwd.order)
 
   return(results)
 }

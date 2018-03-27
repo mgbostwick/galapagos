@@ -1,6 +1,6 @@
 percperm,perctemp,perctill,percpasture,percbrush
-CPermanentesCAFE (+),CTransitoriosMAIZ DURO CHOCLO (+), ,PastosBRACHIARIA (+),ArbolesAGUACATE (+)
-CPermanentesGUABA (+),CTransitoriosNABO (+), ,pc4None (-),cantonSanta Cruz (-)
-CPermanentesNARANJA (+),librasvendida (+), ,v3 (+), 
-pc4None (+), , ,v30a (+), 
-VentaLibras (+), , , , 
+CPermanentesCAFE (+),CTransitoriosNABO (+), ,pc4None (-),cantonSanta Cruz (-)
+CPermanentesNARANJA (+),CTransitoriosMAIZ DURO CHOCLO (+), ,v30a (+),ArbolesAGUACATE (+)
+pc4None (+),librasvendida (+), ,v3 (+),
+VentaLibras (+),, ,PastosBRACHIARIA (+), 
+CPermanentesGUABA (+), , ,, 

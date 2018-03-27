@@ -25,9 +25,12 @@ workers_x.df <- subset(reduced_data, select = workers_include)
 
 levels(reduced_data$workers_binary) = c("Zero", "Positive")
 
-all_workers_hist <- ggplot(data = reduced_data) + geom_bar(mapping = aes(x = workers_binary)) + xlab("fulltimework")
-nonzero_hist <- ggplot(data = reduced_data[reduced_data$fulltimework > 0,]) + geom_histogram(mapping = aes(x = fulltimework))
-log_nonzero_hist <- ggplot(data = reduced_data[reduced_data$fulltimework > 0,]) + geom_histogram(mapping = aes(x = log10(fulltimework)))
+all_workers_hist <- ggplot(data = reduced_data) + geom_bar(mapping = aes(x = workers_binary)) +
+  xlab("fulltimework") + theme(text = element_text(size=14))
+nonzero_hist <- ggplot(data = reduced_data[reduced_data$fulltimework > 0,]) + 
+  geom_histogram(mapping = aes(x = fulltimework)) + theme(text = element_text(size=14))
+log_nonzero_hist <- ggplot(data = reduced_data[reduced_data$fulltimework > 0,]) + 
+  geom_histogram(mapping = aes(x = log10(fulltimework))) + theme(text = element_text(size=14))
 
 #log_nonzero_hist2 <- ggplot(data = reduced_data) + geom_histogram(mapping = aes(x = log10(fulltimework+0.1)))
 
@@ -38,6 +41,9 @@ dev.off()
 worker_binary.models <- fit.models(model.name = "workers_binary", x.data = workers_x.df, 
                                 y.response = reduced_data$workers_binary, response.family = "binomial")
 
+betas <-  worker_binary.models$betas
+betas[abs(betas$s9)>0,'variable']
+worker_binary.models$fwdorder
 
 workers_x.nonzero.pre <- subset(reduced_data[reduced_data$fulltimework > 0,], select = workers_include)
 num_workers_log <- log10(reduced_data[reduced_data$fulltimework > 0, 'fulltimework'])
@@ -53,11 +59,14 @@ workers_x.nonzero <- as.data.frame(workers_x.nonzero[,!colnames(workers_x.nonzer
 worker_nonzero.models <- fit.models(model.name = "workers_nonzero", x.data = workers_x.nonzero, 
                              y.response = num_workers_log, response.family = "gaussian")
 
+betas <-  worker_nonzero.models$betas
+betas[abs(betas$s7)>0,'variable']
+worker_nonzero.models$fwdorder
+
+
 
 
 which(duplicated(workers_x.nonzero, MARGIN = 0))
-
-
 
 ### Diagnostics to find linear dependencies and correlations between variables
 your.matrix <- workers_x.nonzero

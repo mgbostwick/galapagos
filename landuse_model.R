@@ -25,6 +25,12 @@ reclass_vars <- c('ReclassAGRICOLA','ReclassCONSERVACION', 'ReclassFORESTAL', 'R
                   'ReclassPECUARIO', 'ReclassSIN APROVECHAMIENTO')
 
 
+df_melt <- melt(reduced_data[,c('percperm', 'perctemp', 'percfallow', 'perctill', 'percpasture', 'percbrush',"UPA")], id.vars = "UPA")
+pdf("Paper/images/landuse_parplot.pdf",width=12,height=8)
+ggplot(df_melt, aes(x = variable, y = value, group = UPA)) +
+  geom_path(alpha = 0.1, col = 'blue') + ylab("Percent") + xlab("Land Use")
+dev.off()
+
 perc_long1 <- melt(landuse_x.df[,survey_vars])
 pdf("Paper/images/landuse_boxplots.pdf",width=12,height=8)
 ggplot(perc_long1, aes(x=factor(variable),y=value)) + geom_boxplot() + xlab("Land Use Category") + ylab("Percent")
@@ -50,6 +56,8 @@ perc_vars <- as.matrix(reduced_data[,survey_vars])
 
 landuse.models <- fit.models(model.name = "landuse", x.data = landuse_x.df, 
                                      y.response = primary_use, response.family = "multinomial")
+
+betas[abs(betas$s1)>0,'variable']
 
 summary(landuse_x.df$ReclassPECUARIO)
 summary(landuse_x.df$`ReclassSIN APROVECHAMIENTO`)

@@ -19,9 +19,10 @@ netincome_include <- vars[which(is.na(vars$`Net Income`)),1]$`Variable Name`
 
 
 
-full_hist <- ggplot(data = reduced_data) + geom_histogram(mapping = aes(x = netincome))
+full_hist <- ggplot(data = reduced_data) + geom_histogram(mapping = aes(x = netincome)) + theme(text = element_text(size=14))
 reduced_hist <- ggplot(data = reduced_data) + geom_histogram(mapping = aes(x = netincome)) + 
-  scale_x_continuous(limits = c(-3e+04, 3e+04))
+  scale_x_continuous(limits = c(quantile(reduced_data$netincome, .025), quantile(reduced_data$netincome, .975))) + 
+  theme(text = element_text(size=14))
 pdf("Paper/images/netincome_histograms.pdf",width=12,height=8)
 grid.arrange(full_hist, reduced_hist, nrow = 1)
 dev.off()
@@ -52,3 +53,9 @@ corrs_reshape <- melt(corrs, na.rm = TRUE)
 
 netincome.models <- fit.models(model.name = "netincome", x.data = as.data.frame(netincome_x.nonzero), 
                                 y.response = netincome, response.family = "gaussian")
+
+betas <- netincome.models$betas  
+betas[abs(betas$s7)>0,'variable']
+
+netincome.models$fwdorder
+

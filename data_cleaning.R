@@ -6,6 +6,7 @@ library(readxl)
 
 load("BASES_CENSO_UPA_spss/prelim_data.RData")
 
+# Reduce dataset to subset of possible variables for consideration
 vars <-  read_excel("Variables.xlsx", sheet = "vars", range = "C2:I241")
 var_list <- vars$`Variable Name`
 for (i in 1:nrow(vars)){
@@ -14,6 +15,7 @@ for (i in 1:nrow(vars)){
 }
 reduced_data <-  data[,var_list]
 
+# Where appropriate fill NA values with 0
 binary_vars <- vars[which(vars$Binary==1),1]$`Variable Name`
 reduced_data[,binary_vars][is.na(reduced_data[,binary_vars])] <- 0
 
@@ -37,5 +39,5 @@ reduced_data$v45 <- as.numeric(reduced_data$v45)
 # Check to make sure there are no more mistaken factor variables
 reduced_data[1,sapply(reduced_data, is.factor)]
 
-
+# Output clean dataset
 save(reduced_data, file='BASES_CENSO_UPA_spss/clean_data.RData')

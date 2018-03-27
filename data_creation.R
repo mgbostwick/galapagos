@@ -371,6 +371,7 @@ library(tidyverse)
 levels(data$canton) <- c(levels(data$canton), "Floreana")
 data$canton[data$UPA >= 745] = "Floreana"  
 
+# Create dummy variables
 library(dummies)
 shape_data <- read.csv("ShapeAttributes.csv")
 
@@ -389,4 +390,5 @@ shape_vars <- as.data.frame(colnames(shape_agg[,-1]))
 
 data<-merge(data, shape_agg, "UPA",  all.x=TRUE, all.y = TRUE)
 
+# Output preliminary data
 save(data, file='prelim_data.RData')
