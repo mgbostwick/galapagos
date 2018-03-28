@@ -48,7 +48,7 @@
   Department of Geography \\
   University of North Carolina at Chapel Hill\\
   \\
-  March 27th, 2018 \\
+  March 28th, 2018 \\
 }
 
 \begin{document}
@@ -175,6 +175,7 @@ with a (+) or (-).
 \begin{table}[h]
 \centering
 \setlength{\tabcolsep}{20pt}
+\setlength{\abovecaptionskip}{5pt}
 \begin{tabular}{cc}
 \bfseries \underline{Elastic Net} & \bfseries \underline{Forward~Selection} 
 \csvreader[head to column names]{production_top5names.csv}{}%
@@ -196,6 +197,7 @@ fewer variables. Since our goal is to select a small amount of variables, we wil
 
 \begin{wrapfigure}{l}{0.6\textwidth}
 \includegraphics[width=0.6\textwidth]{elastic_cv_production.pdf}
+\setlength{\abovecaptionskip}{0pt}
 \setlength{\belowcaptionskip}{-10pt}
 \caption{\textsl{\small Elastic Net Cross-validation plot for Productivity. The plot shows a desirable "U" shape where a moderate number of variables provides a significant improvement in prediction error.}}
 \label{figure:prod_opt_e}
@@ -217,6 +219,7 @@ enough information, but beyond a certain point adding more variables may not be 
 \begin{wrapfigure}{r}{0.55\textwidth}
 \vspace*{-0.5cm}
 \includegraphics[width=0.55\textwidth]{forward_nvars_production.pdf}
+\setlength{\abovecaptionskip}{0pt}
 \setlength{\belowcaptionskip}{-20pt}
 \caption{\textsl{\small Forward Selection plot for Productivity. The optimal model includes 26 variables.}}
 \label{figure:prod_opt_f}
@@ -249,6 +252,7 @@ following models are fit on this reduced dataset of 727 observations.
 
 \begin{table}[h!]
 \centering
+\setlength{\abovecaptionskip}{5pt}
 \begin{tabular}{cc}
 \bfseries \underline{Elastic Net} & \bfseries \underline{Forward~Selection}
 \csvreader[head to column names]{netincome_top5names.csv}{}%
@@ -268,6 +272,7 @@ chose the optimal Elastic Net model to be at $\lambda_{min}$, which included 9 v
 \begin{wrapfigure}{l}{0.6\textwidth}
 \vspace*{-0.5cm}
 \includegraphics[width=0.6\textwidth]{elastic_cv_netincome.pdf}
+\setlength{\abovecaptionskip}{0pt}
 \setlength{\belowcaptionskip}{-10pt}
 \caption{\textsl{\small Elastic Net Cross-validation plot for Net Income. The plot shows a much smaller improvement in prediction error.}}
 \label{figure:netincome_opt_e}
@@ -307,6 +312,7 @@ the quantity of workers for just those 264 farms with a positive number of worke
 
 \begin{table}[h!]
 \centering
+\setlength{\abovecaptionskip}{5pt}
 \setlength{\tabcolsep}{20pt}
 \begin{tabular}{cc}
 \bfseries \underline{Elastic Net} & \bfseries \underline{Forward~Selection}
@@ -319,6 +325,7 @@ the quantity of workers for just those 264 farms with a positive number of worke
 
 \begin{table}[h!]
 \centering
+\setlength{\abovecaptionskip}{5pt}
 \setlength{\tabcolsep}{20pt}
 \begin{tabular}{cc}
 \bfseries \underline{Elastic Net} & \bfseries \underline{Forward~Selection}
@@ -391,12 +398,13 @@ zero so we removed them from the linear model, leaving 155 farms for modeling.
 \begin{figure}[h]
 \centering
 \includegraphics[width = 0.75\textwidth]{invasive_histograms.pdf}
-\caption{Histogram of Invasive Species. To the left: the proportion of zeroes, in the middle: farms with greater than zero, and to the right: the log transformed percent of invasive species. The two very small values on the right plot are removed.}
+\caption{\textsl{\small Histogram of Invasive Species. To the left: the proportion of zeroes, in the middle: farms with greater than zero, and to the right: the log transformed percent of invasive species. The two very small values on the right plot are removed.}}
 \label{figure:invasive_hist}
 \end{figure}
 
 \begin{table}[h]
 \centering
+\setlength{\abovecaptionskip}{5pt}
 \setlength{\tabcolsep}{20pt}
 \begin{tabular}{cc}
 \bfseries \underline{Elastic Net} & \bfseries \underline{Forward~Selection}
@@ -409,6 +417,7 @@ zero so we removed them from the linear model, leaving 155 farms for modeling.
 
 \begin{table}[h]
 \centering
+\setlength{\abovecaptionskip}{5pt}
 \setlength{\tabcolsep}{20pt}
 \begin{tabular}{cc}
 \bfseries \underline{Elastic Net} & \bfseries \underline{Forward~Selection}
@@ -496,6 +505,7 @@ remove them from the consideration. The remaining categories and the number of f
 
 \begin{table}[h]
 \centering
+\setlength{\abovecaptionskip}{5pt}
 \begin{tabular}{lc}
 Majority Category    & Number of Farms \\
 \hline
@@ -508,6 +518,8 @@ Brush   & 189
 \caption{\textsl{\small Landuse Category Count}}
 \label{table:landuse_cat}
 \end{table}  	
+
+\pagebreak
 
 Using this derived categorical variable we used multinomial logistic regression with Elastic Net to build a model, which found an 
 optimal set of coefficients for each category. The results from the 5 variable model, which had a misclassification rate of 0.39, 
@@ -554,7 +566,7 @@ Standard Linear Regression can be represented in matrix form as seen in equation
 term. The standard linear model works best when the outcome variable $\bY$ has a normal distribution, and therefore takes 
 continuous values. When the outcome variable is continuous, but not normal shaped (e.g., skewed like the productivity 
 data) it can be possible to transform the data by taking the logarithm or something similar. However, when the outcome 
-variable is discrete (such as binary labels of 1 and 0 denoting absence/presence of a feature) a further modification must be made. The outcome variable is clearly no longer normally distributed, as it is not even continuous. Without modification we could get predicted values below 0, above 1 or somewhere in between, none of which make much sense.
+variable is discrete (such as binary labels of 1 and 0 denoting absence/presence of a feature) a further modification must be made. The outcome variable is clearly no longer normally distributed, as it is not even continuous. Without modification we could get predicted values below 0, above 1 or somewhere in between, none of which make sense in this context.
 
 This calls for the use of logistic regression, a type of generalized linear model \cite{dobson}, in which we perform a logit transformation as seen in equation 2 below so that the 
 $\bX\beta$ can still be mapped to a continuous scale. In some respects this is a computational concern, but it also changes the 
@@ -657,7 +669,7 @@ variables or may change the importance of previously highlighted socioeconomic v
 
 \begin{thebibliography}{99}
 
-\bibitem{census} Censo De Las Unidades De Producci\'on Agropecuaria De Gal\'apagos, sinagap.agricultura.gob.ec/pdf/censo\_galapagos/cuestionario\_censo\_upa\_galapagos.pdf.
+\bibitem{census} Censo De Las Unidades De Producci\'on Agropecuaria De Gal\'apagos, \\sinagap.agricultura.gob.ec/pdf/censo\_galapagos/cuestionario\_censo\_upa\_galapagos.pdf.
 
 \bibitem{dobson} Dobson, A. J., \& Barnett, A. (2008). An introduction to generalized linear models. CRC press.
 

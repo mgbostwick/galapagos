@@ -11,8 +11,9 @@ land use choices. For each of the outcome variables we present the top five pred
  ## R files
  * data\_creation.R: merge various data sources at UPA level to generate raw dataset 
  * data\_cleaning.R: perform data cleaning including filling missing values and setting appropriate variable type
- * modeling.function.R: 
- * Each outcome variable is modeled in a separate R file:
+ * modeling.function.R: perform all modeling (logistic/linear regression for Elastic Net/Forward Selection)
+	 and output results
+ * Each outcome variable is modeled in a separate R file that calls the modeling function:
  	1. production\_model.R
  	2. netincome\_model.R
  	3. workers\model.R

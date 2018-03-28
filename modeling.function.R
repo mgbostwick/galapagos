@@ -235,6 +235,7 @@ fit.models <- function(model.name, x.data, y.response, response.family){
     fwd5.r2 <- best.fwd.summary$rsq[5]
     fwd.full.r2 <- best.fwd.summary$rsq[which.min(best.fwd.summary$bic)]
     
+    # Output forwad selection plot
     path <- sprintf("Paper/images/forward_nvars_%s.pdf", model.name)
     pdf(path,width=12,height=8)
     par(mar=c(5,5,5,2)+0.1)
@@ -253,6 +254,7 @@ fit.models <- function(model.name, x.data, y.response, response.family){
     fwd.steps <- step(model.null,scope = list(upper=model.full), direction="forward", data=fwd.data,
                     k = log(nrow(fwd.data)), trace = 0)
     
+    # Output forwad selection plot
     path <- sprintf("Paper/images/forward_nvars_%s.pdf", model.name)
     pdf(path,width=12,height=8)
     par(mar=c(5,5,5,2)+0.1)
@@ -261,10 +263,7 @@ fit.models <- function(model.name, x.data, y.response, response.family){
     points(which.min(fwd.steps$anova$AIC),min(fwd.steps$anova$AIC),col="red",cex=2,pch=20)
     dev.off()
     
-    # fwd.coefs5 <- fwd.steps$anova$Step[2:6]
-    # class(fwd.coefs5) <- class(fwd.coefs5)[-match("AsIs", class(fwd.coefs5))]
-    # fwd.coefs5 <- trimws(gsub("[^[:alnum:] ]", "", fwd.coefs5))
-    
+
     fwd.coefs5 <- names(fwd.steps$coefficients)[2:6]
     fwd.order <- fwd.coefs5
     fwd.coefs5.signs <- lapply(fwd.steps$coefficients[2:6], sign_check)
@@ -288,6 +287,7 @@ fit.models <- function(model.name, x.data, y.response, response.family){
     fwd.full.r2 <- mean(fwd.correct)
   }
   if (response.family == "gaussian"){
+    # Output residual plots
     path <- sprintf("Paper/images/resids_%s.pdf", model.name)
     pdf(path,width=12,height=8)
     par(mfrow=c(2,2))
@@ -303,6 +303,7 @@ fit.models <- function(model.name, x.data, y.response, response.family){
 
   }
   
+  # Combine top 5 variables from Elastic Net and Forward Selection into 1 table
   elastic5.names <- trimws(gsub("[^[:alnum:] ]", "", elastic5.names))
   elastic5.names <- paste(elastic5.names, elastic5.signs, sep=" ") 
   
@@ -325,10 +326,11 @@ fit.models <- function(model.name, x.data, y.response, response.family){
   top5coef <- cbind(elastic5.names, fwd.coefs5)
   colnames(top5coef) <- c("elasticnet", "forward")
   
-
+  # Output table to CSV
   path <- sprintf("Paper/%s_top5names.csv", model.name)
-  #write.csv(top5coef, path, row.names = FALSE)
+  write.csv(top5coef, path, row.names = FALSE)
 
+  # Combine full coefficient lists into 1 table and output to CSV
   elastic.coef.best.nonzero <- as.data.frame(elastic.coef.best.nonzero)
   elastic.coef.best.nonzero <- rownames_to_column(elastic.coef.best.nonzero)
   fwd.coefs <- as.data.frame(fwd.coefs)
@@ -337,8 +339,9 @@ fit.models <- function(model.name, x.data, y.response, response.family){
   colnames(merged_best_coefs) <- c("variable", "elastic", "forward")
   merged_best_coefs$variable <- gsub("[^[:alnum:] ]", "", merged_best_coefs$variable)
   path <- sprintf("Paper/fullcoeflist_%s.csv", model.name)
-  #write.csv(merged_best_coefs, path, row.names = FALSE)
+  write.csv(merged_best_coefs, path, row.names = FALSE)
   
+  # Return key results
   results <- list("elastic5.cvm" = elastic5.cvm, "elastic.full.cvm" = elastic.full.cvm, 
                   "fwd5.r2" = fwd5.r2, "fwd.full.r2" = fwd.full.r2, "betas" = betas, "fwdorder" = fwd.order)
 
